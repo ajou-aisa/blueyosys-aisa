@@ -1,0 +1,24 @@
+line-length = 88
+target-version = "py311"
+
+[lint]
+# Every stable Ruff family except pydocstyle (D), commas (COM), and copyright
+# (CPY). D203/D211, D212/D213, and COM812 conflict with Ruff's formatter; CPY
+# requires an organization-specific notice that this project does not define.
+select = [
+    "E4", "E7", "E9", "F", "W", "I", "N", "UP", "YTT", "ANN", "ASYNC",
+    "S", "BLE", "FBT", "B", "A", "C4", "DTZ", "T10", "EM", "EXE", "FA",
+    "ISC", "ICN", "G", "INP", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET",
+    "SLF", "SLOT", "SIM", "TID", "TC", "INT", "ARG", "PTH", "TD", "FIX",
+    "ERA", "PD", "PGH", "PL", "TRY", "FLY", "NPY", "PERF", "FURB", "LOG", "RUF",
+]
+
+[lint.per-file-ignores]
+"scripts/test_*.py" = [
+    "FLY002", # Exact multiline fixtures conflict with Basedpyright's implicit-concatenation rule.
+    "D", # Pytest tests and helpers do not need public API documentation.
+    "INP001", # The scripts directory is intentionally an importable namespace package.
+    "PLR2004", # Numeric literals are verification vectors and numeric bounds under test.
+    "S101", # Pytest assertions are test assertions.
+    "S603", # Tests deliberately execute fixed, repository-local test binaries.
+]

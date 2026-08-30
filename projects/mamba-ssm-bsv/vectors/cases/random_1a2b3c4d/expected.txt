@@ -1,0 +1,26 @@
+format mamba_ssm_reference_v1
+d_state 2
+head_dim 1
+n_head 2
+n_group 1
+n_token 1
+n_seq 1
+ids 0
+ggml_packed_output y,new_state
+
+tensor new_state
+shape 2 1 2 1
+data
+0 0.0415190049 0x3d2a0fd5
+1 0.148436099 0x3e17ffa2
+2 -0.0923984349 0xbdbd3b64
+3 0.0669281706 0x3d8911a3
+end
+
+tensor y
+shape 1 2 1 1
+data
+0 0.0430854484 0x3d307a5e
+1 0.000328184862 0x39ac103a
+end
+

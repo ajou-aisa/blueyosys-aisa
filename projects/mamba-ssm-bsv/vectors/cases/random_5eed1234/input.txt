@@ -1,0 +1,24 @@
+// mamba_ssm_q16_v1
+// Q16.16 words in GGML tensor order
+// state_input
+fffff900
+ffffe700
+fffff000
+fffff200
+// x
+ffffc000
+ffffe000
+// dt
+ffffe600
+00000600
+// A
+ffff3500
+ffff0800
+ffff5f00
+ffff0e00
+// B
+00002000
+fffffb00
+// C
+ffffee00
+00000500

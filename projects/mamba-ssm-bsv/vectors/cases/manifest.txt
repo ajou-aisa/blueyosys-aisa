@@ -1,0 +1,10 @@
+format mamba_ssm_case_manifest_v1
+case hand_small
+case zero
+case positive_x
+case negative_x
+case random_1a2b3c4d
+case random_31415926
+case random_5eed1234
+case random_c0ffee01
+case random_deadbeef
