@@ -1,214 +1,215 @@
-import Clocks :: *;
 import Vector::*;
 import FIFO::*;
-import Uart::*;
 import Sdram::*;
-
 import FloatingPoint::*;
+import RmsNorm::*;
 
 interface HwMainIfc;
-	method ActionValue#(Bit#(8)) serial_tx;
-	method Action serial_rx(Bit#(8) rx);
+    method ActionValue#(Bit#(8)) serial_tx;
+    method Action serial_rx(Bit#(8) rx);
 endinterface
 
+// 테스트용 HwMain의 실행 단계를 나타낸다.
+typedef enum {
+    HwLoadInput,
+    HwStartRow,
+    HwSendRow,
+    HwReceiveRow,
+    HwFlushOutput,
+    HwDone
+} HwMainState deriving (Bits, Eq, FShow);
+
 module mkHwMain#(Ulx3sSdramUserIfc mem) (HwMainIfc);
-	Clock curclk <- exposeCurrentClock;
-	Reset currst <- exposeCurrentReset;
 
-	Reg#(Bit#(32)) cycles <- mkReg(0);
-	rule incCyclecount;
-		cycles <= cycles + 1;
-	endrule
+    Reg#(HwMainState) hwState <- mkReg(HwLoadInput);
 
-	Reg#(Bit#(32)) processingStartCycle <- mkReg(0);
-	Reg#(Bit#(5)) inputEnqueued <- mkReg(0);
+    // 실행 시간 측정
+    Reg#(Bit#(32)) cycles <- mkReg(0);
+    Reg#(Bit#(32)) processingStartCycle <- mkReg(0);
 
-	FIFO#(Bit#(32)) inputQ <- mkSizedFIFO(16);
-	FIFO#(Bit#(32)) outputQ <- mkSizedFIFO(16);
+    // UART로 받은 FP32 개수
+    Reg#(Bit#(5)) inputEnqueued <- mkReg(0);
 
-	Reg#(Vector#(4, Vector#(4, Float))) matrixA
-		<- mkReg(replicate(replicate(0)));
-	Reg#(Vector#(4, Vector#(4, Float))) matrixC
-		<- mkReg(replicate(replicate(0)));
+    // 4x4 테스트 matrix용 FIFO
+    FIFO#(Bit#(32)) inputQ <- mkSizedFIFO(16);
+    FIFO#(Bit#(32)) outputQ <- mkSizedFIFO(16);
 
-	Reg#(Bool) startOutputFlush <- mkReg(False);
-	Reg#(Bit#(5)) loadMatrixCnt <- mkReg(0);
-	Reg#(Bit#(2)) loadMatrixCol <- mkReg(0);
-	Reg#(Bit#(2)) loadMatrixRow <- mkReg(0);
-	rule loadMatrix (loadMatrixCnt < 16 && !startOutputFlush);
-		inputQ.deq;
-		matrixA[loadMatrixRow][loadMatrixCol] <= unpack(inputQ.first);
+    // 전체 테스트 matrix는 HwMain만 관리한다.
+    Reg#(Vector#(4, Vector#(4, Float))) matrixA
+        <- mkReg(replicate(replicate(0)));
 
-		loadMatrixCnt <= loadMatrixCnt + 1;
-		loadMatrixCol <= loadMatrixCol + 1;
-		if (loadMatrixCol == 3) begin
-			loadMatrixRow <= loadMatrixRow + 1;
-		end
-	endrule
+    Reg#(Vector#(4, Vector#(4, Float))) matrixC
+        <- mkReg(replicate(replicate(0)));
 
-	// C 코드의 변수와 직접 대응되는 레지스터다.
-	// rmsRow             : 바깥쪽 row
-	// rmsSumCol          : 제곱합을 구하는 첫 번째 i (0~4)
-	// rmsSumSq           : sum_sq
-	// rmsNewtonIteration : inverse RMS의 Newton 보정 횟수
-	// rmsHalfMean        : 0.5 * (mean_sq + eps)
-	// rmsInvRms          : inv_rms
-	// rmsNormCol         : 결과를 쓰는 두 번째 i
-	Reg#(Bit#(2)) rows <- mkReg(4);
-	Reg#(Bit#(2)) cols <- mkReg(4);
-	
-	Reg#(Bit#(2)) rmsRow <- mkReg(0);
-	Reg#(Bit#(3)) rmsSumCol <- mkReg(0);
-	Reg#(Float) rmsSumSq <- mkReg(0);
-	Reg#(Bit#(2)) rmsNewtonIteration <- mkReg(0);
-	Reg#(Float) rmsHalfMean <- mkReg(0);
-	Reg#(Float) rmsInvRms <- mkReg(0);
-	Reg#(Bool) rmsInvValid <- mkReg(False);
-	Reg#(Bit#(2)) rmsNormCol <- mkReg(0);
+    // RMSNorm은 길이 4 이하의 vector를 처리한다.
+    RmsNormIfc#(4) rmsNorm <- mkRmsNorm;
 
-	// 한 rule 안에서 C 코드와 같은 순서로 한 행을 처리한다.
-	//   1. sum_sq 계산
-	//   2. inv_rms 계산
-	//   3. output 계산
-	rule processRmsNorm (
-		loadMatrixCnt == 16 && !startOutputFlush
-	);
-		// C:
-		// for (i = 0; i < cols; ++i)
-		//     sum_sq += x[i] * x[i];
-		//
-		// 부동소수점 연산을 한 열씩 수행하고 다음 열로 이동한다.
-		if (rmsSumCol < 4) begin
-			Bit#(2) col = truncate(rmsSumCol);
-			Float value = matrixA[rmsRow][col];
-			rmsSumSq <= rmsSumSq + value * value;
-			rmsSumCol <= rmsSumCol + 1;
-		end
+    // 입력 matrix 저장 위치
+    Reg#(Bit#(5)) loadMatrixCnt <- mkReg(0);
+    Reg#(Bit#(2)) loadMatrixRow <- mkReg(0);
+    Reg#(Bit#(2)) loadMatrixCol <- mkReg(0);
 
-		// 네 열의 제곱합을 모두 구했으면 inv_rms를 계산한다.
-		// C:
-		// mean_sq = sum_sq / cols;
-		// inv_rms = 1.0f / sqrt(mean_sq + eps);
-		else if (!rmsInvValid) begin
-			if (rmsNewtonIteration == 0) begin
-				// cols가 4이므로 0.25를 곱해 평균을 구한다.
-				// epsilon은 C 호출과 동일한 1e-5로 고정한다.
-				Float oneQuarter = unpack(32'h3e800000);
-				Float epsilon = unpack(32'h3727c5ac);
-				Float oneHalf = unpack(32'h3f000000);
-				Float meanSq = rmsSumSq * oneQuarter + epsilon;
+    // 현재 처리 중인 row와 column
+    Reg#(Bit#(2)) processRow <- mkReg(0);
+    Reg#(Bit#(2)) sendCol <- mkReg(0);
+    Reg#(Bit#(2)) receiveCol <- mkReg(0);
 
-				// inverse sqrt의 초기 근삿값을 IEEE-754 비트에서 구한다.
-				Bit#(32) estimateBits =
-					32'h5f3759df - (pack(meanSq) >> 1);
+    // 출력 matrix flush 위치
+    Reg#(Bit#(2)) flushOutputMatrixRow <- mkReg(0);
+    Reg#(Bit#(2)) flushOutputMatrixCol <- mkReg(0);
 
-				rmsHalfMean <= meanSq * oneHalf;
-				rmsInvRms <= unpack(estimateBits);
-				rmsNewtonIteration <= 1;
-			end
-			else begin
-				// Newton 공식:
-				// y = y * (1.5 - 0.5 * x * y * y)
-				// 두 번 보정한 뒤 rmsInvRms를 최종값으로 사용한다.
-				Float oneAndHalf = unpack(32'h3fc00000);
-				Float correction = oneAndHalf -
-					rmsHalfMean * rmsInvRms * rmsInvRms;
-				rmsInvRms <= rmsInvRms * correction;
+    // UART serializer와 deserializer
+    Reg#(Vector#(4, Bit#(8))) outputSerializer <- mkReg(?);
+    Reg#(Bit#(2)) outputSerializerIdx <- mkReg(0);
+    Reg#(Vector#(4, Bit#(8))) inputDeserializer <- mkReg(?);
+    Reg#(Bit#(2)) inputDeserializerIdx <- mkReg(0);
 
-				if (rmsNewtonIteration == 2) begin
-					rmsInvValid <= True;
-				end
-				else begin
-					rmsNewtonIteration <= rmsNewtonIteration + 1;
-				end
-			end
-		end
+    rule countCycles;
+        cycles <= cycles + 1;
+    endrule
 
-		// inv_rms가 준비되면 정규화된 원소를 한 열씩 저장한다.
-		// C:
-		// for (i = 0; i < cols; ++i)
-		//     y[i] = x[i] * inv_rms;
-		else begin
-			matrixC[rmsRow][rmsNormCol] <=
-				matrixA[rmsRow][rmsNormCol] * rmsInvRms;
+    // inputQ의 FP32 값을 matrixA에 저장한다.
+    rule loadInputMatrix (
+        hwState == HwLoadInput &&
+        loadMatrixCnt < 16
+    );
+        Bit#(32) inputValue = inputQ.first;
+        inputQ.deq;
 
-			if (rmsNormCol == 3) begin
-				// 현재 행의 네 결과를 모두 기록했으므로
-				// 행 내부 상태를 초기화한다.
-				rmsSumCol <= 0;
-				rmsSumSq <= 0;
-				rmsNewtonIteration <= 0;
-				rmsInvValid <= False;
-				rmsNormCol <= 0;
+        matrixA[loadMatrixRow][loadMatrixCol] <= unpack(inputValue);
+        loadMatrixCnt <= loadMatrixCnt + 1;
 
-				if (rmsRow == 3) begin
-					// 네 행을 모두 처리했다. 입력 상태를 초기화하고
-					// matrixC를 UART 출력 FIFO로 보내기 시작한다.
-					rmsRow <= 0;
-					loadMatrixCnt <= 0;
-					loadMatrixRow <= 0;
-					loadMatrixCol <= 0;
-					inputEnqueued <= 0;
-					startOutputFlush <= True;
-				end
-				else begin
-					// 다음 행에서 같은 계산을 반복한다.
-					rmsRow <= rmsRow + 1;
-				end
-			end
-			else begin
-				rmsNormCol <= rmsNormCol + 1;
-			end
-		end
-	endrule
+        if (loadMatrixCol == 3) begin
+            loadMatrixCol <= 0;
+            loadMatrixRow <=
+                (loadMatrixRow == 3) ? 0 : loadMatrixRow + 1;
+        end
+        else begin
+            loadMatrixCol <= loadMatrixCol + 1;
+        end
 
-	Reg#(Bit#(2)) flushOutputMatrixRow <- mkReg(0);
-	Reg#(Bit#(2)) flushOutputMatrixCol <- mkReg(0);
-	// 완성된 matrixC를 row-major 순서로 outputQ에 넣는다.
-	rule flushOutput (startOutputFlush && loadMatrixCnt == 0);
-		outputQ.enq(pack(
-			matrixC[flushOutputMatrixRow][flushOutputMatrixCol]));
+        if (loadMatrixCnt == 15) begin
+            hwState <= HwStartRow;
+        end
+    endrule
 
-		flushOutputMatrixCol <= flushOutputMatrixCol + 1;
-		if (flushOutputMatrixCol == 3) begin
-			flushOutputMatrixRow <= flushOutputMatrixRow + 1;
-			if (flushOutputMatrixRow == 3) begin
-				startOutputFlush <= False;
-				$write("Acceleration done! %d cycles\n",
-					cycles - processingStartCycle);
-			end
-		end
-	endrule
+    // 현재 row의 RMSNorm 연산을 시작한다.
+    rule startRowNormalization (hwState == HwStartRow);
+        Float meanScale = unpack(32'h3e800000); // 0.25
+        Float eps = unpack(32'h3727c5ac);       // 1e-5
 
-	Reg#(Bit#(2)) outputDeSerializerIdx <- mkReg(0);
+        rmsNorm.startRow(4, meanScale, eps);
 
-	Reg#(Vector#(4, Bit#(8))) inputDeSerializer <- mkReg(?);
-	Reg#(Bit#(2)) inputDeSerializerIdx <- mkReg(0);
+        sendCol <= 0;
+        hwState <= HwSendRow;
+    endrule
 
-	method ActionValue#(Bit#(8)) serial_tx;
-		Vector#(4, Bit#(8)) serValue = unpack(outputQ.first);
-		Bit#(8) ret = serValue[outputDeSerializerIdx];
-		if (outputDeSerializerIdx == 3) begin
-			outputQ.deq;
-		end
-		outputDeSerializerIdx <= outputDeSerializerIdx + 1;
-		return ret;
-	endmethod
+    // 현재 row의 원소를 RMSNorm에 하나씩 전달한다.
+    rule sendRowElement (hwState == HwSendRow);
+        Float value = matrixA[processRow][sendCol];
 
-	method Action serial_rx(Bit#(8) data)
-		if (loadMatrixCnt < 16 && !startOutputFlush);
-		Vector#(4, Bit#(8)) desValue = inputDeSerializer;
-		desValue[inputDeSerializerIdx] = data;
-		inputDeSerializerIdx <= inputDeSerializerIdx + 1;
-		inputDeSerializer <= desValue;
+        rmsNorm.put(value);
 
-		if (inputDeSerializerIdx == 3) begin
-			inputQ.enq(pack(desValue));
-			inputEnqueued <= inputEnqueued + 1;
+        if (sendCol == 3) begin
+            sendCol <= 0;
+            hwState <= HwReceiveRow;
+        end
+        else begin
+            sendCol <= sendCol + 1;
+        end
+    endrule
 
-			if (inputEnqueued == 15) begin
-				processingStartCycle <= cycles;
-			end
-		end
-	endmethod
+    // RMSNorm 결과를 matrixC에 저장한다.
+    rule receiveNormalizedElement (hwState == HwReceiveRow);
+        let value <- rmsNorm.get;
+
+        matrixC[processRow][receiveCol] <= value;
+
+        if (receiveCol == 3) begin
+            receiveCol <= 0;
+
+            if (processRow == 3) begin
+                hwState <= HwFlushOutput;
+
+                $write(
+                    "Acceleration done! %d cycles\n",
+                    cycles - processingStartCycle
+                );
+            end
+            else begin
+                processRow <= processRow + 1;
+                hwState <= HwStartRow;
+            end
+        end
+        else begin
+            receiveCol <= receiveCol + 1;
+        end
+    endrule
+
+    // matrixC를 row-major 순서로 outputQ에 넣는다.
+    rule flushOutputMatrix (hwState == HwFlushOutput);
+        outputQ.enq(
+            pack(matrixC[flushOutputMatrixRow][flushOutputMatrixCol])
+        );
+
+        if (flushOutputMatrixCol == 3) begin
+            flushOutputMatrixCol <= 0;
+
+            if (flushOutputMatrixRow == 3) begin
+                flushOutputMatrixRow <= 0;
+                hwState <= HwDone;
+            end
+            else begin
+                flushOutputMatrixRow <= flushOutputMatrixRow + 1;
+            end
+        end
+        else begin
+            flushOutputMatrixCol <= flushOutputMatrixCol + 1;
+        end
+    endrule
+
+    method ActionValue#(Bit#(8)) serial_tx;
+        Bit#(8) ret = 0;
+
+        if (outputSerializerIdx == 0) begin
+            Vector#(4, Bit#(8)) bytes = unpack(outputQ.first);
+            outputQ.deq;
+
+            outputSerializer <= bytes;
+            ret = bytes[0];
+        end
+        else begin
+            ret = outputSerializer[outputSerializerIdx];
+        end
+
+        outputSerializerIdx <= outputSerializerIdx + 1;
+
+        return ret;
+    endmethod
+
+    method Action serial_rx(Bit#(8) data)
+        if (
+            hwState == HwLoadInput &&
+            inputEnqueued < 16
+        );
+
+        Vector#(4, Bit#(8)) bytes = inputDeserializer;
+        bytes[inputDeserializerIdx] = data;
+        inputDeserializer <= bytes;
+
+        if (inputDeserializerIdx == 3) begin
+            inputDeserializerIdx <= 0;
+
+            inputQ.enq(pack(bytes));
+            inputEnqueued <= inputEnqueued + 1;
+
+            if (inputEnqueued == 15) begin
+                processingStartCycle <= cycles;
+            end
+        end
+        else begin
+            inputDeserializerIdx <= inputDeserializerIdx + 1;
+        end
+    endmethod
+
 endmodule
