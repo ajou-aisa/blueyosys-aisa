@@ -1,4 +1,4 @@
-PROJECTS := basic matmul nn_fc nn_fc_quantized nn_fc_zfpe sway_observation
+PROJECTS := basic matmul nn_fc nn_fc_quantized nn_fc_zfpe sway_observation emamba_baseline
 PROJECT ?= basic
 BOARD ?= ulx3s-85f
 

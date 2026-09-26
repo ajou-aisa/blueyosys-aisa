@@ -1,0 +1,96 @@
+{
+  "status": "pass",
+  "evidence": "BSV Bluesim simulation",
+  "frames_checked": 8,
+  "scalar_outputs_checked": 456,
+  "input_words": 2560,
+  "finish_cycle": 242574,
+  "post_completion_drain_cycles": 2048,
+  "source_bubbles": "cycles modulo 17 equal to 0 or 1",
+  "sink_stalls": "8192 cycles after each first output, plus cycles modulo 11 equal to 0",
+  "repeated_frame_pairs_checked": [
+    [
+      0,
+      7
+    ]
+  ],
+  "timing_scope": "testbench cycles include deliberate source and sink stalls; not unstalled kernel performance",
+  "input_sha256": "2c5c6f28792e80b8ad80dd02e7300d35ef0a7bae1ce70fe8d8ce1f1552bba0f4",
+  "expected_sha256": "a8f349248aa58f39d86ceb200a036794b4e1ff3a03c079dd878edde21861c2b7",
+  "log_sha256": "bfd230b43341649eb925065041702426f9986dcb84d96b31ed77bba6f9112351",
+  "emamba_records_sha256": "bfd230b43341649eb925065041702426f9986dcb84d96b31ed77bba6f9112351",
+  "frames": [
+    {
+      "frame": 0,
+      "input_first_cycle": 2,
+      "input_last_cycle": 363,
+      "output_first_cycle": 43888,
+      "output_last_cycle": 52142,
+      "first_input_to_last_output_cycles": 52140,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 1,
+      "input_first_cycle": 364,
+      "input_last_cycle": 725,
+      "output_first_cycle": 70800,
+      "output_last_cycle": 79053,
+      "first_input_to_last_output_cycles": 78689,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 2,
+      "input_first_cycle": 726,
+      "input_last_cycle": 1087,
+      "output_first_cycle": 97712,
+      "output_last_cycle": 105966,
+      "first_input_to_last_output_cycles": 105240,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 3,
+      "input_first_cycle": 1090,
+      "input_last_cycle": 18018,
+      "output_first_cycle": 124624,
+      "output_last_cycle": 132877,
+      "first_input_to_last_output_cycles": 131787,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 4,
+      "input_first_cycle": 18019,
+      "input_last_cycle": 44930,
+      "output_first_cycle": 151537,
+      "output_last_cycle": 159791,
+      "first_input_to_last_output_cycles": 141772,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 5,
+      "input_first_cycle": 44933,
+      "input_last_cycle": 71844,
+      "output_first_cycle": 178448,
+      "output_last_cycle": 186701,
+      "first_input_to_last_output_cycles": 141768,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 6,
+      "input_first_cycle": 71845,
+      "input_last_cycle": 98756,
+      "output_first_cycle": 205360,
+      "output_last_cycle": 213614,
+      "first_input_to_last_output_cycles": 141769,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 7,
+      "input_first_cycle": 98757,
+      "input_last_cycle": 125668,
+      "output_first_cycle": 232272,
+      "output_last_cycle": 240525,
+      "first_input_to_last_output_cycles": 141768,
+      "sink_pause_cycles": 8192
+    }
+  ]
+}

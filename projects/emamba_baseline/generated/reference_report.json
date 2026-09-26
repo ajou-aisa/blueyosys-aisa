@@ -1,0 +1,718 @@
+{
+  "artifactSHA256": "a724dec5ed6ac270ae9e4137fbfa957e7ccea15bd25021ee931bb0d8df7dd5df",
+  "sourceCheckpointSHA256": "33e3a2e51a2924b35e39afdcb3a113133852ad7243f91ba6a34f8a4a3749c1aa",
+  "eMambaCommit": "7c953adef12d7fd277eb31bd1d641b690171ec34",
+  "swayHardwareCommit": "403bc7ccc0420b25d6aab3e504bfa0998d3ed39f",
+  "artifactDigest": "70d21fed9e187561e4d941c9f1c835af0d6a0b1c9b053a805ffd9ca754a0ff11",
+  "selectedProfile": "percentile",
+  "profileHash": "4847b805b0a3c54d0712492d68536a07db7e6711f4f9495f819c83786799d074",
+  "modelConfig": {
+    "d_model": 20,
+    "expand": 2,
+    "patch_size": 2,
+    "num_blocks": 2,
+    "d_state": 8,
+    "out_dim": 57,
+    "in_channels": 5,
+    "readout": "flatten"
+  },
+  "quantization": {
+    "scale": "power_of_two",
+    "zero_point": 0,
+    "rounding": "ties_to_even",
+    "clipping": "signed_saturating",
+    "nonlinear": "piecewise_fp32",
+    "piecewise": {
+      "method": "secant_fp32_v1",
+      "silu_knots": [
+        -7.0,
+        -5.0,
+        -4.0,
+        -3.0,
+        -2.0,
+        -1.5,
+        -1.0,
+        -0.5,
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "exp_knots": [
+        -4.0,
+        -3.5,
+        -3.0,
+        -2.5,
+        -2.0,
+        -1.5,
+        -1.0,
+        -0.5,
+        0.0,
+        0.25,
+        0.5,
+        1.0
+      ],
+      "silu_tails": "zero_identity",
+      "exp_tails": "zero_e"
+    }
+  },
+  "profile": {
+    "blocks.0.conv": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.conv1d.bias": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.conv1d.input": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.conv1d.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.gate": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.gateProjection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.gate_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.gated": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.inputProjection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.input_proj.weight": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.norm.beta": {
+      "exponent": -10,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.norm.gamma": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.norm.input": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.norm.output": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.output": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.output_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.projection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.residual": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.A": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.Abar": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.B": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.Bbar": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.C": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.D": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.currentState": {
+      "exponent": -21,
+      "bits": 24,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.state": {
+      "exponent": -14,
+      "bits": 17,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.delta": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.deltaInput": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.deltaProjection": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.delta_proj.bias": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.delta_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.expInput": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.parameters": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.ssm_param_proj.weight": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.x": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.0.ssm.y": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.conv": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.conv1d.bias": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.conv1d.input": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.conv1d.weight": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.gate": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.gateProjection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.gate_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.gated": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.inputProjection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.input_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.norm.beta": {
+      "exponent": -9,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.norm.gamma": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.norm.input": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.norm.output": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.output": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.output_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.projection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.residual": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.A": {
+      "exponent": -3,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.Abar": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.B": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.Bbar": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.C": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.D": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.currentState": {
+      "exponent": -21,
+      "bits": 24,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.state": {
+      "exponent": -14,
+      "bits": 17,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.delta": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.deltaInput": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.deltaProjection": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.delta_proj.bias": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.delta_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.expInput": {
+      "exponent": -3,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.parameters": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.ssm_param_proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.x": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "blocks.1.ssm.y": {
+      "exponent": -3,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.activation": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.hidden": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.input": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.proj.0.bias": {
+      "exponent": -9,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.proj.0.weight": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.proj.2.bias": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "head.proj.2.weight": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "input": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "output": {
+      "exponent": -5,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "patch_embedding.output": {
+      "exponent": -6,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "patch_embedding.patches": {
+      "exponent": -4,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "patch_embedding.proj.bias": {
+      "exponent": -8,
+      "bits": 8,
+      "zero_point": 0
+    },
+    "patch_embedding.proj.weight": {
+      "exponent": -7,
+      "bits": 8,
+      "zero_point": 0
+    }
+  },
+  "normEpsilon": {
+    "blocks.0.norm": 1e-06,
+    "blocks.1.norm": 1e-06
+  },
+  "normEpsilonCodes": [
+    1074,
+    1074
+  ],
+  "branchScaleChecks": [
+    {
+      "block": 0,
+      "commonInput": -7,
+      "inputWeight": -6,
+      "gateWeight": -7,
+      "inputOutput": -6,
+      "gateOutput": -6
+    },
+    {
+      "block": 1,
+      "commonInput": -7,
+      "inputWeight": -7,
+      "gateWeight": -7,
+      "inputOutput": -6,
+      "gateOutput": -6
+    }
+  ],
+  "stateRelationChecked": "Abar exponent -7; current-state exponent +7 equals stored-state exponent",
+  "hardwareWidthChecks": [
+    {
+      "operation": "linear MAC",
+      "maximumAbsoluteValue": 5242880,
+      "signedBits": 32
+    },
+    {
+      "operation": "depthwise convolution",
+      "maximumAbsoluteValue": 65536,
+      "signedBits": 18
+    },
+    {
+      "operation": "RangeNorm shifted numerator",
+      "maximumAbsoluteValue": 71776119061217280,
+      "signedBits": 64
+    },
+    {
+      "operation": "scan state reduction",
+      "maximumAbsoluteValue": 8589934592,
+      "signedBits": 35
+    }
+  ],
+  "parameterSHA256": {
+    "patch_embedding.proj.weight": "ea8e6700fe6827637ff05322613ca66c38de0872987452f5f800b7ed834155c9",
+    "patch_embedding.proj.bias": "6928372024dd6b9212d7076ce126a236bf709b565da628e4acdd72ca7446eccc",
+    "blocks.0.norm.gamma": "41aa247054d099660f0d8d38d7e5c41c4253610310a17c7bf4158dac180eb9f6",
+    "blocks.0.norm.beta": "dcc56d2f28c209d4228343e1869075b3c67bfc5b89872958abd8fa3f61f639c8",
+    "blocks.0.gate_proj.weight": "5e21325f9bead328ac257a875b8fbf535a296b443ed29a61832fbe706f9c6eeb",
+    "blocks.0.input_proj.weight": "e0cf086bd6b44c671ba1a8535f8c89715aca8495918bb79470dba5e65993fc55",
+    "blocks.0.conv.conv1d.weight": "c85572063552f6b2d211b90feae68a817789d8f46ac80a68e68edb3a03da7b1c",
+    "blocks.0.conv.conv1d.bias": "0501a390b3599afa7d6ffd98a09c9cabe0abb229dbfcc3db392924d80f228fa6",
+    "blocks.0.ssm.A": "af73eb222032b49b45a4833e9c61e3949b3452aa16078c070800a780609f568a",
+    "blocks.0.ssm.D": "2ac5ff894e32a8d6f44a13f4550906c4bfb19a46084dfea8d38213242c878912",
+    "blocks.0.ssm.ssm_param_proj.weight": "c4f3f1edb5fb8f0c0790e475a3644a3a0634ad12f9d560e002b19763047018a8",
+    "blocks.0.ssm.delta_proj.weight": "12dc378c1717f94f741d0eb7de3f9173ab3430d629f6e2489f6c1d5bdd57110b",
+    "blocks.0.ssm.delta_proj.bias": "a305cb2b1899bbe361b74919cea0108c7f8f1270da76b30c00804d316bf589bd",
+    "blocks.0.output_proj.weight": "90d480dfd6c61dcc963babf4c77fc942f7846664da1ce4e6245dc224d660c9b4",
+    "blocks.1.norm.gamma": "d88d0a9e2d3852d549b9b70a722dc17df87693d2f83c89925f1dff8c0b3ecb4f",
+    "blocks.1.norm.beta": "deb34ea1b9f92e8c024c804cfe40c54edbb9557cd792f7e3d6461e86e81009ab",
+    "blocks.1.gate_proj.weight": "1e2e3cebac091be398fbe2fcc7459d3878145ca31647c24e852eae07c35be87c",
+    "blocks.1.input_proj.weight": "d7bdade14ce33dbc2806b12fefe7214e97877c256599ae0687ff363bb91117d1",
+    "blocks.1.conv.conv1d.weight": "904e940c4443b5d87c584e112a11433b0157bf9e284d3c4e04ebd658d31253df",
+    "blocks.1.conv.conv1d.bias": "eaa429a06ca47485a5679203d091bdc4e53e99d9ed369e2cd87b742c44c31db4",
+    "blocks.1.ssm.A": "6577aaa4eb5dbf20f7f4568e94133f8533544ea26700638ce1d9768b31d35bfb",
+    "blocks.1.ssm.D": "6ebc7379f7dca10fedbb0085e64d0b2574d4464ba81cd54da31d2d343ec232d6",
+    "blocks.1.ssm.ssm_param_proj.weight": "07f947cf78ce1b2f664afbd0897e5dab958b374e7e4239bd49654bb796d68b41",
+    "blocks.1.ssm.delta_proj.weight": "da14612a886b395358747b24de372b172d07ba3e9d8b621a7b71fcd5336433f0",
+    "blocks.1.ssm.delta_proj.bias": "c1c9197e7861cda50749dcd661227b390630139de7ce6f4525aa0f7ac1b9b9cb",
+    "blocks.1.output_proj.weight": "08fc39e1f805ee90e191730cd860d840fabbc26429823dd5e34d7a77a4aa7b4a",
+    "head.proj.0.weight": "d35e2efb2cda03c1429d4d49670650827cda5058b6b901ebd2df0dcbb1ae1203",
+    "head.proj.0.bias": "2223873e676d4ca338e236b71ed7ad7788497bdfc1eaccb69e4fbeb29200cc9f",
+    "head.proj.2.weight": "d5e674870cb6bd5458918ee1f8e75622a280277046ecd20634c4dc674f8f4d66",
+    "head.proj.2.bias": "821980cf32be239e2b45b5db7962bde1502648f3f8e1e6fbd8d0875e07b5a5c3"
+  },
+  "parameterCount": 15717,
+  "romVerification": {
+    "parameterCodesMatched": 15717,
+    "nonlinearCodesMatched": 1024,
+    "goldenOutputCodesMatched": 456
+  },
+  "normFixtures": {
+    "rowsPerBlock": 6,
+    "channelsPerRow": 20,
+    "order": "block-major",
+    "cases": [
+      "constant zero",
+      "constant +127",
+      "small span 0/1",
+      "mixed -128/+127",
+      "ties-to-even edge",
+      "real test frame 0 token 0"
+    ],
+    "source": "frozen QEMamba blocks.N.norm on dequantized identical INT8 input codes",
+    "independentIntegerReferenceMatched": true
+  },
+  "linearLayers": [
+    {
+      "id": 0,
+      "output": "patch_embedding.output",
+      "input": "patch_embedding.patches",
+      "weight": "patch_embedding.proj.weight"
+    },
+    {
+      "id": 1,
+      "output": "blocks.0.inputProjection",
+      "input": "blocks.0.norm.output",
+      "weight": "blocks.0.input_proj.weight"
+    },
+    {
+      "id": 2,
+      "output": "blocks.0.ssm.parameters",
+      "input": "blocks.0.ssm.x",
+      "weight": "blocks.0.ssm.ssm_param_proj.weight"
+    },
+    {
+      "id": 3,
+      "output": "blocks.0.ssm.deltaProjection",
+      "input": "blocks.0.ssm.deltaInput",
+      "weight": "blocks.0.ssm.delta_proj.weight"
+    },
+    {
+      "id": 4,
+      "output": "blocks.0.projection",
+      "input": "blocks.0.gated",
+      "weight": "blocks.0.output_proj.weight"
+    },
+    {
+      "id": 5,
+      "output": "blocks.1.inputProjection",
+      "input": "blocks.1.norm.output",
+      "weight": "blocks.1.input_proj.weight"
+    },
+    {
+      "id": 6,
+      "output": "blocks.1.ssm.parameters",
+      "input": "blocks.1.ssm.x",
+      "weight": "blocks.1.ssm.ssm_param_proj.weight"
+    },
+    {
+      "id": 7,
+      "output": "blocks.1.ssm.deltaProjection",
+      "input": "blocks.1.ssm.deltaInput",
+      "weight": "blocks.1.ssm.delta_proj.weight"
+    },
+    {
+      "id": 8,
+      "output": "blocks.1.projection",
+      "input": "blocks.1.gated",
+      "weight": "blocks.1.output_proj.weight"
+    },
+    {
+      "id": 9,
+      "output": "head.hidden",
+      "input": "head.input",
+      "weight": "head.proj.0.weight"
+    },
+    {
+      "id": 10,
+      "output": "output",
+      "input": "head.activation",
+      "weight": "head.proj.2.weight"
+    }
+  ],
+  "nonlinearTables": [
+    {
+      "input": "blocks.0.gateProjection",
+      "output": "blocks.0.gate",
+      "operation": "silu"
+    },
+    {
+      "input": "blocks.0.ssm.expInput",
+      "output": "blocks.0.ssm.Abar",
+      "operation": "exp"
+    },
+    {
+      "input": "blocks.1.gateProjection",
+      "output": "blocks.1.gate",
+      "operation": "silu"
+    },
+    {
+      "input": "blocks.1.ssm.expInput",
+      "output": "blocks.1.ssm.Abar",
+      "operation": "exp"
+    }
+  ],
+  "tableAddressOrder": "signed -128..127 in .npy; two's-complement in BSV",
+  "fixtures": {
+    "count": 8,
+    "inputShape": [
+      8,
+      8,
+      8,
+      5
+    ],
+    "outputShape": [
+      8,
+      57
+    ],
+    "sameInputCodesAsPTQ": true,
+    "independentIntegerReferenceMatched": true,
+    "inputOrder": "8x8x5 HWC signed INT8 per frame",
+    "outputOrder": "57 signed INT8 coordinates per frame",
+    "realTestIndices": [
+      0,
+      1,
+      2
+    ],
+    "realDatasetSHA256": "331551d42039e97a0afc260029d605dec29f4a0d11ede65e4c1328c49cb5c145",
+    "repeatFrameMatched": true
+  },
+  "generatedSHA256": {
+    "test_input.hex": "2c5c6f28792e80b8ad80dd02e7300d35ef0a7bae1ce70fe8d8ce1f1552bba0f4",
+    "nonlinear_tables.npy": "1459deb2d81794de0fabdc287182922d395042c315eb034ba2b8714c4f9ff802",
+    "EMambaParameters.bsv": "8384ca9317f057450cde373f1b540c92e75bff47dc91dbfc14133aa2f80e786d",
+    "norm_input.hex": "77db7f48cc56b6215506f036fabe84f61962cdb9684f1702c89990855b535fc8",
+    "norm_expected.hex": "9741a8eba99b53b30bea1fb861ffc6a9f958aa4c08575508f362401487b6ebb0",
+    "GeneratedTestConfig.bsv": "bbc91c08d5cde8c6671870871f7177530b233a3078c7a8f4b06771b43cb44476",
+    "test_expected.hex": "a8f349248aa58f39d86ceb200a036794b4e1ff3a03c079dd878edde21861c2b7"
+  }
+}
