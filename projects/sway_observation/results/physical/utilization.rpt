@@ -1,0 +1,45 @@
+blueYosys Resource Utilization Report
+======================================
+Project:    sway_observation
+Board:      ulx3s-85f
+Top module: mkTop
+
+Yosys post-synthesis cell statistics
+------------------------------------
+Total cells: 165368
+
+Cell type                               Count
+---------------------------------- ----------
+LUT4                                    68227
+TRELLIS_FF                              50644
+CCU2C                                   34903
+PFUMX                                    8577
+L6MUX21                                  2619
+TRELLIS_DPR16X4                           252
+MULT18X18D                                141
+DP16KD                                      4
+EHXPLLL                                     1
+
+nextpnr post-pack device utilization
+------------------------------------
+Only resources with non-zero use are listed.
+
+Resource                           Used    Available      Usage
+---------------------------- ---------- ------------ ----------
+DCCA                                  2           56      3.57%
+DP16KD                                4          208      1.92%
+EHXPLLL                               1            4     25.00%
+MULT18X18D                          141          156     90.38%
+TRELLIS_COMB                     145239        83640    173.65%
+TRELLIS_FF                        50644        83640     60.55%
+TRELLIS_IO                           11          365      3.01%
+TRELLIS_RAMW                        252        10455      2.41%
+
+Clock timing
+------------
+No nextpnr clock data were found.
+
+Machine-readable source reports
+-------------------------------
+Yosys:   /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/mkTop.yosys.json
+nextpnr: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/mkTop.nextpnr.log

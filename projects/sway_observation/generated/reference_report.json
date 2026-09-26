@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 2,
+  "architecture": "first baseline, combinational coefficient lookup",
+  "exportManifestSHA256": "1f3164c10d34ba1cbc5064d8e0cdbdde8a6accef23eb5107d417d8c739c70f86",
+  "quantizationSHA256": "c1f937d22a8aab0afb89c21b4a06550021663916a09836d9ca53959e8b23ad6c",
+  "checkpointSHA256": "866604ec36154035d4f23f9c9ff246657772af06bad2a626cf43bd6420fb22e7",
+  "modelProvenanceSHA256": "6255c23d096fe347abe9813f2e1ae1c71338afd18f339cbba10adeb33e5e1852",
+  "parameterCount": 15717,
+  "parameterVerification": "Every binary SHA256, size, shape, hex value and INT8 checkpoint tensor matched",
+  "nonlinearROM": {
+    "backend": "torch 2.8.0+cpu",
+    "dtype": "float32",
+    "definition": "reference/generate.py:piecewise (frozen checkpoint operation order)",
+    "pwlKnots": {
+      "silu_knots": [
+        -7.0,
+        -5.05,
+        -3.55,
+        -1.65,
+        -1.25,
+        -0.95,
+        -0.7,
+        -0.5,
+        -0.3,
+        -0.15,
+        0.0,
+        0.15,
+        0.3,
+        0.5,
+        0.7,
+        0.95,
+        1.3,
+        7.0
+      ],
+      "exp_knots": [
+        -4.0,
+        -2.9,
+        -2.22,
+        -1.72,
+        -1.34,
+        -1.02,
+        -0.76,
+        -0.54,
+        -0.34,
+        -0.16,
+        0.0,
+        1.0
+      ]
+    },
+    "addressOrder": "signed inputs -128 through 127",
+    "tables": [
+      {
+        "block": 0,
+        "input": "blocks.0.conv",
+        "output": "blocks.0.x",
+        "operation": "silu",
+        "inputExponent": -4,
+        "outputExponent": -5
+      },
+      {
+        "block": 0,
+        "input": "blocks.0.gateInput",
+        "output": "blocks.0.gate",
+        "operation": "silu",
+        "inputExponent": -6,
+        "outputExponent": -6
+      },
+      {
+        "block": 0,
+        "input": "blocks.0.expInput",
+        "output": "blocks.0.Abar",
+        "operation": "exp",
+        "inputExponent": -4,
+        "outputExponent": -7
+      },
+      {
+        "block": 1,
+        "input": "blocks.1.conv",
+        "output": "blocks.1.x",
+        "operation": "silu",
+        "inputExponent": -6,
+        "outputExponent": -6
+      },
+      {
+        "block": 1,
+        "input": "blocks.1.gateInput",
+        "output": "blocks.1.gate",
+        "operation": "silu",
+        "inputExponent": -5,
+        "outputExponent": -7
+      },
+      {
+        "block": 1,
+        "input": "blocks.1.expInput",
+        "output": "blocks.1.Abar",
+        "operation": "exp",
+        "inputExponent": -5,
+        "outputExponent": -7
+      }
+    ]
+  },
+  "hardwareWidthChecks": [
+    {
+      "operation": "linear0 accumulation",
+      "maximumAbsoluteValue": 44032,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear0 aligned bias",
+      "maximumAbsoluteValue": 47808,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear0 output rescale",
+      "maximumAbsoluteValue": 374,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear1 accumulation",
+      "maximumAbsoluteValue": 43264,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear1 aligned bias",
+      "maximumAbsoluteValue": 43264,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear1 output rescale",
+      "maximumAbsoluteValue": 169,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear2 accumulation",
+      "maximumAbsoluteValue": 140928,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear2 aligned bias",
+      "maximumAbsoluteValue": 140928,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear2 output rescale",
+      "maximumAbsoluteValue": 1101,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear3 accumulation",
+      "maximumAbsoluteValue": 26880,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear3 aligned bias",
+      "maximumAbsoluteValue": 28912,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear3 output rescale",
+      "maximumAbsoluteValue": 226,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear4 accumulation",
+      "maximumAbsoluteValue": 241920,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear4 aligned bias",
+      "maximumAbsoluteValue": 241920,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear4 output rescale",
+      "maximumAbsoluteValue": 1890,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear5 accumulation",
+      "maximumAbsoluteValue": 97408,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear5 aligned bias",
+      "maximumAbsoluteValue": 97408,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear5 output rescale",
+      "maximumAbsoluteValue": 191,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear6 accumulation",
+      "maximumAbsoluteValue": 124416,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear6 aligned bias",
+      "maximumAbsoluteValue": 124416,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear6 output rescale",
+      "maximumAbsoluteValue": 972,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear7 accumulation",
+      "maximumAbsoluteValue": 18688,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear7 aligned bias",
+      "maximumAbsoluteValue": 22464,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear7 output rescale",
+      "maximumAbsoluteValue": 176,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear8 accumulation",
+      "maximumAbsoluteValue": 125184,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear8 aligned bias",
+      "maximumAbsoluteValue": 125184,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear8 output rescale",
+      "maximumAbsoluteValue": 1956,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear9 accumulation",
+      "maximumAbsoluteValue": 695808,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear9 aligned bias",
+      "maximumAbsoluteValue": 698752,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear9 output rescale",
+      "maximumAbsoluteValue": 683,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear10 accumulation",
+      "maximumAbsoluteValue": 76672,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "linear10 aligned bias",
+      "maximumAbsoluteValue": 80512,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "linear10 output rescale",
+      "maximumAbsoluteValue": 1258,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.norm numerator",
+      "maximumAbsoluteValue": 5614080,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.norm denominator",
+      "maximumAbsoluteValue": 20400,
+      "bits": 32,
+      "signed": false
+    },
+    {
+      "operation": "blocks.0.convolution sum",
+      "maximumAbsoluteValue": 21760,
+      "bits": 18,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.convolution aligned bias",
+      "maximumAbsoluteValue": 22784,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.convolution output rescale",
+      "maximumAbsoluteValue": 89,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.recurrent and drive",
+      "maximumAbsoluteValue": 10485760,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.state reduction",
+      "maximumAbsoluteValue": 8589934592,
+      "bits": 35,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.SSM aligned output",
+      "maximumAbsoluteValue": 8623489024,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.SSM output rescale",
+      "maximumAbsoluteValue": 32896,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.in to convInput",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.in to gateInput",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.xProjection to deltaInput",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.xProjection to B",
+      "maximumAbsoluteValue": 64,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.xProjection to C",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.deltaProjection to delta",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.expInput product rescale",
+      "maximumAbsoluteValue": 2048,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.Bbar product rescale",
+      "maximumAbsoluteValue": 512,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.gated product rescale",
+      "maximumAbsoluteValue": 1024,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.residual aligned sum",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.0.residual output rescale",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.norm numerator",
+      "maximumAbsoluteValue": 10575360,
+      "bits": 32,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.norm denominator",
+      "maximumAbsoluteValue": 40800,
+      "bits": 32,
+      "signed": false
+    },
+    {
+      "operation": "blocks.1.convolution sum",
+      "maximumAbsoluteValue": 24320,
+      "bits": 18,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.convolution aligned bias",
+      "maximumAbsoluteValue": 25120,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.convolution output rescale",
+      "maximumAbsoluteValue": 393,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.recurrent and drive",
+      "maximumAbsoluteValue": 16777216,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.state reduction",
+      "maximumAbsoluteValue": 8589934592,
+      "bits": 35,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.SSM aligned output",
+      "maximumAbsoluteValue": 8858370048,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.SSM output rescale",
+      "maximumAbsoluteValue": 2112,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.in to convInput",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.in to gateInput",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.xProjection to deltaInput",
+      "maximumAbsoluteValue": 512,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.xProjection to B",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.xProjection to C",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.deltaProjection to delta",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.expInput product rescale",
+      "maximumAbsoluteValue": 512,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.Bbar product rescale",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.gated product rescale",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.residual aligned sum",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.residual output rescale",
+      "maximumAbsoluteValue": 256,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "input to patches",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "blocks.1.residual to headInput",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    },
+    {
+      "operation": "headHidden to headActivation",
+      "maximumAbsoluteValue": 128,
+      "bits": 64,
+      "signed": true
+    }
+  ],
+  "arithmeticChecks": {
+    "signedDivision": "1179657 numerator/divisor cases passed",
+    "signedRescale": "4325409 value/shift cases passed",
+    "constantNormalization": "10 cases passed"
+  },
+  "normalization": "Exact rational (20*x-sum)*gamma/(20*(max-min))+beta, then one ties-even INT8 requantization; constant input returns requantized beta",
+  "state": "INT24 current state; output before arithmetic right shift by 7 into INT17 retained state; reset per frame",
+  "testTuning": false,
+  "rtlScope": "This report evaluates the integer software reference. RTL verification is reported separately.",
+  "fixtures": {
+    "count": 14,
+    "realTestIndices": [
+      0,
+      1,
+      49,
+      249,
+      1023,
+      2047,
+      4095,
+      7983
+    ],
+    "synthetic": [
+      "zero",
+      "all -128",
+      "all +127",
+      "alternating -128/+127",
+      "repeat real index 0",
+      "repeat real index 0"
+    ],
+    "inputOrder": "320 signed INT8 HWC bytes/frame after model input preprocessing",
+    "outputOrder": "57 signed INT8 x19,y19,z19 coordinates/frame",
+    "inputExponent": -5,
+    "outputExponent": -6
+  },
+  "fullTest": {
+    "integerReference": {
+      "frames": 7984,
+      "mae_cm": 6.107159731651063,
+      "rmse_coordinate_mean_cm": 8.35790827423903,
+      "rmse_global_cm": 9.000469094355385,
+      "axis_mae_cm": {
+        "x": 7.218718046498034,
+        "y": 3.95868399650308,
+        "z": 7.144077151952074
+      },
+      "axis_rmse_cm": {
+        "x": 10.02416216453648,
+        "y": 5.542677641417025,
+        "z": 9.506885016763585
+      }
+    },
+    "existingSwQDQ": {
+      "frames": 7984,
+      "mae_cm": 6.10705499712151,
+      "rmse_coordinate_mean_cm": 8.356373500431944,
+      "rmse_global_cm": 8.998808838575384,
+      "axis_mae_cm": {
+        "x": 7.219886161696558,
+        "y": 3.9595027907137856,
+        "z": 7.141776038954185
+      },
+      "axis_rmse_cm": {
+        "x": 10.022033774356297,
+        "y": 5.541711310039382,
+        "z": 9.505375416900158
+      }
+    },
+    "evaluationSeconds": 4.890044668001792,
+    "matchedOutputElements": 440000,
+    "totalOutputElements": 455088,
+    "matchedFrames": 7313,
+    "maxOutputDifferenceLSB": 6,
+    "meanAbsoluteOutputDifferenceLSB": 0.03638417185247688,
+    "differenceRMSE_cm": 0.3262280326024427,
+    "comparison": "Integer rational normalization replaces float32 QDQ normalization; no blanket bit-exact SW claim"
+  },
+  "datasetSHA256": {
+    "featuremap_test.npy": "331551d42039e97a0afc260029d605dec29f4a0d11ede65e4c1328c49cb5c145",
+    "labels_test.npy": "a1f29ebee5d5b4a63810997e9eda811af97bd222dcf4d4766777ccaea1b256e8"
+  },
+  "generatedSHA256": {
+    "SwayParameters.bsv": "d3e8d3ae436529cbe7e7c43635dc33607814d5deb6c7db344ba2584ee810531a",
+    "nonlinear_tables.npy": "2bad6648b11e4ff7fa793ee867c81f122df802a6214e9c7b4d304572b97f2a48",
+    "GeneratedTestConfig.bsv": "74aee8f80bda41ec1aef155a909cc21a1810e581b330e0dcd43f251e2c06ffa6",
+    "test_input.hex": "bff0e0a7e6eb3044228153400ada59360959abb4a4779df584efe15343ed54eb",
+    "test_expected.hex": "ee895d85ae7b2eb20b7c17718438623c04252725bd679a093d3c56aa7bdf0214",
+    "test_trace.npz": "616588ef76e7eade26ec1b0a1021687622ee4333a02b8a0598cff382c5734751",
+    "predictions_integer.npy": "334bf6e6f9d8e5df599d61c64bbd19b8c6562672a1cdb2e1f6bb64a4237f1e75"
+  },
+  "referenceSHA256": {
+    "integer_model.py": "62d8f5f99e9a95e1f784662f98a283db0b7660297be3b1a0182cb08ae3236ee9",
+    "generate.py": "ec1241c1790ec0ab52a7f6ec828728fd96a165d2ea22962865a72d9ab5938f78"
+  }
+}

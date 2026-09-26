@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "failure_stage": "placement",
+  "reason": "device_capacity_exceeded",
+  "device": "LFE5U-85F",
+  "package": "CABGA381",
+  "speed_grade": 6,
+  "speed_grade_source": "nextpnr default; unchanged board profile passes --85k --package CABGA381",
+  "source_commits": {
+    "sway": "07df0ef55f47f78c916ce5955154ec9d41555cb9",
+    "blueyosys": "c96c1edccf669afda807f9353d3462d28eaa73f4"
+  },
+  "netlist_sha256": "cdffdbb15179098662f838ee11dc9044f3b0feebd6eda8a7acf1dd49632e5cad",
+  "baseline_sources_unchanged": true,
+  "make_exit_code": 2,
+  "nextpnr_exit_code": 125,
+  "elapsed_seconds": 78.25486731529236,
+  "command": [
+    "make",
+    "-C",
+    "projects/sway_observation",
+    "pnr",
+    "BOARD=ulx3s-85f",
+    "-o",
+    "netlist"
+  ],
+  "packing": "completed",
+  "placement": "failed",
+  "routing": "not_started",
+  "resources": {
+    "TRELLIS_IO": {
+      "used": 11,
+      "available": 365,
+      "percent": 3.01
+    },
+    "DCCA": {
+      "used": 2,
+      "available": 56,
+      "percent": 3.57
+    },
+    "DP16KD": {
+      "used": 4,
+      "available": 208,
+      "percent": 1.92
+    },
+    "MULT18X18D": {
+      "used": 141,
+      "available": 156,
+      "percent": 90.38
+    },
+    "EHXPLLL": {
+      "used": 1,
+      "available": 4,
+      "percent": 25.0
+    },
+    "TRELLIS_FF": {
+      "used": 50644,
+      "available": 83640,
+      "percent": 60.55
+    },
+    "TRELLIS_COMB": {
+      "used": 145239,
+      "available": 83640,
+      "percent": 173.65
+    },
+    "TRELLIS_RAMW": {
+      "used": 252,
+      "available": 10455,
+      "percent": 2.41
+    }
+  },
+  "comb_sites_over_capacity": 61599,
+  "clock_constraints": {
+    "input_mhz": 25.0,
+    "core_mhz": 100.0,
+    "core_net": "clocks_pll_clk_100mhz",
+    "core_constraint_confirmed_in_log": true,
+    "method": "Derived by nextpnr from the 25 MHz input constraint and PLL dividers",
+    "warnings": [
+      "Shared LPF pll_clk_100mhz and pll_clk_125mhz aliases are absent and ignored. The actual core clock receives the derived 100 MHz constraint."
+    ]
+  },
+  "timing": {
+    "status": "not_evaluated_after_routing",
+    "reason": "Legal placement failed before routing",
+    "routed_fmax_mhz": null,
+    "routed_slack_ns": null,
+    "closure_at_100_mhz": null
+  },
+  "placer_error": "Unable to find legal placement for cell '$nextpnr_CCU2C_2440$CCU2_COMB0' of type 'TRELLIS_COMB' after 10001 attempts, check constraints and utilisation. Use `--placer-heap-cell-placement-timeout` to change the number of attempts.",
+  "nextpnr_json_report_generated": false,
+  "routed_configuration_generated": false,
+  "bitstream_generated": false,
+  "evidence": {
+    "build.log": "581d2c952940ba167f21613772fd3d05002b64fef2aaf34e2104072592d5adb8",
+    "inputs.json": "e73b64a28641255f5ef6100dfa908ee696c210f39dd6397f19f8f9931f248075",
+    "nextpnr.log": "15a3d3f0d5df1793eb3785aaf4fda69da96a2acbbad05627521d4f5b2c8f4412",
+    "run.json": "72c1e99c9ba5dd9dce32a29aad1df9464166792107e13f2f9ce41f75fad94610",
+    "toolchain.json": "f92c50eba4844f2e48ead877bc61f0ee9d8ebaadde09fda8f03571a964b744db",
+    "utilization.rpt": "338a33ea154ff0dc53ee37e1ecba2418358c82cf57242bcd760f3cefa8904ef0"
+  }
+}

@@ -8,6 +8,8 @@ module pll_fastclk(
 wire clkfb;
 wire locked;
 assign lockedn = !locked;
+// INT_OP feedback: 25 MHz * 5 * 4 = 500 MHz VCO.
+// Output divisors 4/5/20 produce 125/100/25 MHz, respectively.
 (* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
 EHXPLLL #(
 		.PLLRST_ENA("DISABLED"),
@@ -27,7 +29,7 @@ EHXPLLL #(
 		.CLKOS2_DIV(20),
 		.CLKOS2_CPHASE(0),
 		.CLKOS2_FPHASE(0),
-		.CLKFB_DIV(10),
+		.CLKFB_DIV(5),
 		.CLKI_DIV(1),
 		.FEEDBK_PATH("INT_OP")
 ) pll_i (

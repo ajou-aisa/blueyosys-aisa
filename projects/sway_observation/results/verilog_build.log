@@ -1,0 +1,110 @@
+make -C "projects/sway_observation" BOARD="ulx3s-85f" netlist
+make[1]: Entering directory '/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation'
+rm -rf /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build
+mkdir -p /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build
+bsc -show-schedule -show-range-conflict -aggressive-conditions -bdir /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build -vdir /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build -simdir /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build -info-dir /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build -fdir /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build -remove-dollar \
+	-p +:/workspace/scratch/839f8f1063a0/work/blueyosys/lib/bsv:/workspace/scratch/839f8f1063a0/work/blueyosys/fpga/ecp5/bsv:/workspace/scratch/839f8f1063a0/work/blueyosys/boards/ulx3s/bsv:/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation:/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv:/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/generated:/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/sim -verilog -u -g mkTop /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv
+Warning: Command line: (S0073)
+  Duplicate directories were found in the path specified with the -p flag.
+  Only the first occurrence will be used. The duplicates are:
+    /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation
+  Note that when the -bdir flag is used, that directory is automatically added
+  to the head of the path.
+checking package dependencies
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/lib/bsv/Uart.bsv
+Foreign import file created: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/bdpiUartGet.ba
+Foreign import file created: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/bdpiUartPut.ba
+VPI wrapper files created: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/vpi_wrapper_bdpiUartGet.{c,h}
+VPI wrapper files created: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/vpi_wrapper_bdpiUartPut.{c,h}
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/boards/ulx3s/bsv/PLL.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayClock.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayTypes.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/generated/SwayParameters.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayLinear.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayNorm.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayScan.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayBlock.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayBaseline.bsv
+compiling ./HwMain.bsv
+compiling /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv
+code generation for mkTop starts
+Warning: "Array.bsv", line 185, column 6: (G0024)
+  The function unfolding steps interval has been exceeded when unfolding
+  `primFix'. The current number of steps is 100000. Next warning at 200000
+  steps. Elaboration terminates at 1000000 steps.
+  During elaboration of `remainderR' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayNorm.bsv",
+  line 38, column 45.
+  During elaboration of `normalization' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayBlock.bsv",
+  line 40, column 17.
+  During elaboration of `block1' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayBaseline.bsv",
+  line 22, column 18.
+  During elaboration of `core' at "HwMain.bsv", line 23, column 17.
+  During elaboration of `main' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 34, column 19.
+  During elaboration of `mkTop' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+Warning: "Prelude.bs", line 1327, column 9: (G0024)
+  The function unfolding steps interval has been exceeded when unfolding
+  `Prelude.Ord~Prelude.Integer'. The current number of steps is 200000. Next
+  warning at 300000 steps. Elaboration terminates at 1000000 steps.
+  During elaboration of `inputR' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayLinear.bsv",
+  line 27, column 35.
+  During elaboration of `headHidden' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayBaseline.bsv",
+  line 23, column 44.
+  During elaboration of `core' at "HwMain.bsv", line 23, column 17.
+  During elaboration of `main' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 34, column 19.
+  During elaboration of `mkTop' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+Warning: "Prelude.bs", line 597, column 0: (G0024)
+  The function unfolding steps interval has been exceeded when unfolding
+  `indexableToBits'. The current number of steps is 300000. Next warning at
+  400000 steps. Elaboration terminates at 1000000 steps.
+  During elaboration of the body of rule `process6' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/bsv/SwayBaseline.bsv",
+  line 100, column 14.
+  During elaboration of `core' at "HwMain.bsv", line 23, column 17.
+  During elaboration of `main' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 34, column 19.
+  During elaboration of `mkTop' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+Warning: "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv", line 26, column 8: (G0046)
+  Reset information for method `ftdi_rxd' is lost because the reset is not
+  available at the module boundary.
+  During elaboration of the interface method `ftdi_rxd' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+  During elaboration of `mkTop' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+Warning: "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv", line 26, column 8: (G0046)
+  Reset information for method `ftdi_tx' is lost because the reset is not
+  available at the module boundary.
+  During elaboration of the interface method `ftdi_tx' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+  During elaboration of `mkTop' at
+  "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/Top.bsv",
+  line 26, column 8.
+Schedule dump file created: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/mkTop.sched
+Verilog file created: /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/mkTop.v
+All packages are up to date.
+cp /workspace/scratch/839f8f1063a0/work/blueyosys/boards/ulx3s/constraints/ulx3s.lpf /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/
+test -f "/workspace/scratch/839f8f1063a0/toolchains/bsc-2025.07-ubuntu-24.04/lib/Verilog/RegFile.v"
+test -f "/workspace/scratch/839f8f1063a0/toolchains/bsc-2025.07-ubuntu-24.04/lib/Verilog/ResetInverter.v"
+cp "/workspace/scratch/839f8f1063a0/toolchains/bsc-2025.07-ubuntu-24.04/lib/Verilog/RegFile.v" "/workspace/scratch/839f8f1063a0/toolchains/bsc-2025.07-ubuntu-24.04/lib/Verilog/ResetInverter.v" "/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build/"
+cd /workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation/build && yosys \
+	-p "synth_ecp5 -top mkTop -json mkTop.json; tee -q -o mkTop.yosys.rpt stat -top mkTop; tee -q -o mkTop.yosys.json stat -json -top mkTop" \
+	*.v
+

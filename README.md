@@ -1,121 +1,87 @@
 # blueYosys
-* **An Advanced, High-Performance Boilerplate Codebase for Lattice ECP5-Based Embedded FPGA Kernel Development using Yosys Opensource Toolchain and Bluespec SystemVerilog (BSV).**
-* `blueYosys` separates project logic, reusable libraries, FPGA-family backends, and board integration while providing a consistent simulation-to-bitstream workflow.
 
-## Development flow
-1. Bluespec Compiler (`bsc`) elaborates the selected BSV project and generates synthesizable Verilog.
-2. Yosys synthesizes the design into an FPGA-family technology netlist.
-3. `nextpnr` performs placement and routing for the selected board profile.
-4. The FPGA-family packer generates the final bitstream.
-5. An optional programmer loads the bitstream onto the board.
+A Bluespec SystemVerilog development environment for Lattice ECP5 FPGA kernels. It provides a shared flow from simulation to bitstream generation, with reusable libraries and board integration.
 
-## File structure
+**Current target:** ULX3S-85F (`BOARD=ulx3s-85f`). The ICE40 backend is reserved for future support.
+
+## Requirements
+
+Use Linux with GNU Make, GCC/G++, Python 3, and pthread support. Install Bluespec Compiler (`bsc`) and Bluesim separately. [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build/releases) supplies Yosys, `nextpnr-ecp5`, `ecppack`, and `openFPGALoader`; select the archive for your host architecture and enable its `environment` script.
+
+Project-specific dependencies are listed in each project's README. Sway uses the checked-in model tables for normal builds; regenerating its reference data requires NumPy and PyTorch.
+
+## How to build
+
+Run commands from the repository root. Replace `basic` with the desired project name.
+
+| Task | Command |
+| --- | --- |
+| Generate Verilog | `make verilog PROJECT=basic BOARD=ulx3s-85f` |
+| Synthesize the netlist | `make netlist PROJECT=basic BOARD=ulx3s-85f` |
+| Place and route | `make pnr PROJECT=basic BOARD=ulx3s-85f` |
+| Generate the bitstream | `make bitstream PROJECT=basic BOARD=ulx3s-85f` |
+| Complete hardware build | `make synth PROJECT=basic BOARD=ulx3s-85f` |
+| Build the host application | `make host PROJECT=basic` |
+| Compile Bluesim | `make bsim PROJECT=basic BOARD=ulx3s-85f` |
+| Compile and run Bluesim | `make runsim PROJECT=basic BOARD=ulx3s-85f` |
+| Program the FPGA | `make program PROJECT=basic BOARD=ulx3s-85f` |
+
+Each command builds its prerequisites. `synth` runs the hardware flow through bitstream generation; it does not program the board.
+
 ```text
-blueyosys/
-├── projects/   self-contained kernels and optional Host applications
-├── lib/        device-independent BSV, BSC runtime RTL, and shared C++/BDPI
-├── fpga/       FPGA-family BSV and RTL backends for ECP5 and future ICE40 support
-├── boards/     concrete board profiles, integration, constraints, and programming
-├── scripts/    generated-Verilog post-processing and build-report generation
-├── build.mk    shared build, simulation, reporting, and programming flow
-└── Makefile    repository-level project dispatcher
+BSV -> Verilog -> Yosys netlist -> nextpnr placement/routing -> Bitstream
 ```
 
-`fpga/ecp5/` contains the current ECP5 arithmetic backend, `lib/rtl/bsc/` contains the common Bluespec runtime RTL, and `fpga/ice40/` is reserved for the future ICE40 backend.
+To build directly from a project, use `make -C projects/basic synth BOARD=ulx3s-85f`.
 
-`lib/bsv/QuantizedMath.bsv` provides reusable signed INT4, INT8, and INT16 multiply/MAC pipelines, wide accumulators, saturating arithmetic, rounded shifts, requantization, and Float conversion.
+Programming defaults to `ujprog`. To use openFPGALoader:
 
-## Prerequisites & Dependencies
-* **Platform and hardware:** Linux is recommended. `BOARD=ulx3s-85f` is currently build-ready for the Lattice ECP5-based ULX3S-85F.
-* **HDL and FPGA tools:** Install Bluespec Compiler (`bsc`) and Bluesim separately. OSS CAD Suite provides Yosys, `nextpnr-ecp5`, Project Trellis `ecppack`, and common programming tools such as `openFPGALoader`. `ujprog` is the default programmer and can be replaced through `PROGRAMMER` and `PROGRAMMER_FLAGS`.
-* **Host tools:** GNU Make, GCC/G++, Python 3, and pthread support.
-
-### Installation on Ubuntu x86-64 (OSS CAD Suite)
-The following commands install the latest OSS CAD Suite release under `~/.local/opt`, enable it for Bash, and verify the tools. Bluespec Compiler is still required separately.
-
-```bash
-sudo apt update
-sudo apt install -y build-essential curl python3
-
-mkdir -p "$HOME/.local/opt"
-OSS_CAD_URL="$(
-  curl -fsSL https://api.github.com/repos/YosysHQ/oss-cad-suite-build/releases/latest |
-  python3 -c 'import json, sys; r = json.load(sys.stdin); print(next(a["browser_download_url"] for a in r["assets"] if a["name"].startswith("oss-cad-suite-linux-x64-") and a["name"].endswith(".tgz")))'
-)"
-curl -fL "$OSS_CAD_URL" -o /tmp/oss-cad-suite.tgz
-rm -rf "$HOME/.local/opt/oss-cad-suite"
-tar -xzf /tmp/oss-cad-suite.tgz -C "$HOME/.local/opt"
-
-grep -qxF 'source "$HOME/.local/opt/oss-cad-suite/environment"' "$HOME/.bashrc" || \
-  echo 'source "$HOME/.local/opt/oss-cad-suite/environment"' >> "$HOME/.bashrc"
-source "$HOME/.local/opt/oss-cad-suite/environment"
-
-command -v yosys nextpnr-ecp5 ecppack openFPGALoader
-```
-
-For Ubuntu ARM64, replace `linux-x64` with `linux-arm64` in the asset-name filter. To program ULX3S with the bundled programmer, use:
-
-```bash
+```sh
 make program PROJECT=basic BOARD=ulx3s-85f \
   PROGRAMMER=openFPGALoader PROGRAMMER_FLAGS="-b ulx3s"
 ```
 
-## How to build
-Select a design with `PROJECT=<name>` and a concrete target with `BOARD=<profile>`.
-
-* Generate Verilog from BSV: `make verilog PROJECT=basic BOARD=ulx3s-85f`
-* Generate the Yosys netlist: `make netlist PROJECT=basic BOARD=ulx3s-85f`
-* Run place-and-route: `make pnr PROJECT=basic BOARD=ulx3s-85f`
-* Generate the bitstream: `make bitstream PROJECT=basic BOARD=ulx3s-85f`
-* Run the complete hardware flow: `make synth PROJECT=basic BOARD=ulx3s-85f`
-* Build the Host application: `make host PROJECT=basic`
-* Compile Bluesim: `make bsim PROJECT=basic BOARD=ulx3s-85f`
-* Build and run Bluesim: `make runsim PROJECT=basic BOARD=ulx3s-85f`
-* Program the FPGA: `make program PROJECT=basic BOARD=ulx3s-85f`
-* Build directly from a project: `make -C projects/basic synth BOARD=ulx3s-85f`
-
-The bitstream and reports are written under `projects/<project>/build/`.
-
-## Build reports
-Every hardware build leaves inspectable synthesis, utilization, and timing artifacts:
+## Project layout
 
 ```text
-mkTop.yosys.rpt       human-readable post-synthesis cell statistics
-mkTop.yosys.json      machine-readable Yosys statistics
-mkTop.nextpnr.json    post-pack utilization and routed Fmax data
-mkTop.nextpnr.log     complete place-and-route log
-mkTop.utilization.rpt combined resource and timing summary
+projects/   Kernels and optional host applications
+lib/        Shared BSV, BSC runtime RTL, and C++/BDPI libraries
+fpga/       FPGA-family arithmetic backends
+boards/     Board profiles, interfaces, clocks, and constraints
+scripts/    Verilog post-processing and build reports
+build.mk    Shared build rules
+Makefile    Project dispatcher
 ```
 
-When nextpnr reports a timing failure, the build still returns a failure status, but `blueYosys` attempts to generate `mkTop.utilization.rpt` from the nextpnr report or saved log.
+| Project | Purpose |
+| --- | --- |
+| `basic` | UART, SDRAM, and floating-point MAC example |
+| `matmul` | 4x4 floating-point matrix multiplication |
+| `nn_fc` | Fully connected neural-network computation |
+| `nn_fc_quantized` | INT4/INT8/INT16 fully connected computation |
+| `nn_fc_zfpe` | Fully connected computation with ZFP-style compression |
+| [sway_observation](projects/sway_observation/README.md) | MARS INT8 PTQ model and dedicated-engine baseline |
 
-## Build stages
+To add a project, copy the closest example into `projects/`, set `ROOTDIR` and `PROJECT_NAME` in its Makefile, include `$(ROOTDIR)/build.mk`, and register the project in the root Makefile.
+
+## Build results
+
+Hardware outputs are written to `projects/<project>/build/`:
+
 ```text
-verilog -> netlist -> pnr -> bitstream -> synth
-   bsc       yosys    nextpnr     packer
+mkTop.yosys.rpt        Synthesis statistics
+mkTop.yosys.json       Machine-readable synthesis statistics
+mkTop.nextpnr.log      Placement, routing, and timing log
+mkTop.nextpnr.json     Machine-readable utilization and timing
+mkTop.utilization.rpt  Combined resource and timing summary
 ```
 
-The stages can be called independently to inspect intermediate Verilog, netlists, placement, routing, and reports.
+Timing failure returns an error even when a summary report is generated. A saved report alone does not mean the build passed.
 
-## Cleaning the workspace
-* `make clean PROJECT=<name>` removes the selected project's generated hardware, Bluesim, Host, log, and report files.
-* `make clean-all` cleans every included project.
-
-## Working examples
-* `projects/basic`: UART streaming, SDRAM read-back, and SimpleFloat MAC example.
-* `projects/matmul`: 4x4 floating-point matrix-multiplication accelerator.
-* `projects/nn_fc`: Fully connected neural-network computation example.
-* `projects/nn_fc_quantized`: Packed runtime-selectable INT4, INT8, and INT16 fully connected neural-network example using `QuantizedMath` and SDRAM burst reads.
-* `projects/nn_fc_zfpe`: Fully connected neural-network design integrating ZFP-style compression and decompression blocks.
-
-## Adding a new project
-1. Copy the closest example under `projects/`.
-2. Keep project-specific BSV and Host software inside the project directory.
-3. Define `ROOTDIR` and `PROJECT_NAME` in the project Makefile.
-4. Include `$(ROOTDIR)/build.mk`.
-5. Add the project name to the root `Makefile` project list.
+Clean one project with `make clean PROJECT=<name>`, or all included projects with `make clean-all`.
 
 ## Notes
-* Maintained by Se-Min Lim.
-* The current production target is the Lattice ECP5-based ULX3S-85F.
-* Board-independent projects should depend on `lib/` and abstract board interfaces rather than FPGA- or board-specific implementations.
+
+Maintained by Se-Min Lim. Keep project logic separate from shared libraries and board-specific code.
+
+Keep READMEs concise, focused on essential information, and easy for readers to follow. Do not create new `.md` files without the user's explicit permission. Do not create `.gitignore` files.

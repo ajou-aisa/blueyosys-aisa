@@ -26,7 +26,7 @@ module mkQuantizedMult18x18DImport#(Clock clk, Reset rstn)
 	input_clock (clk) = clk;
 	input_reset (rstn) = rstn;
 
-	method dataOut dataout;
+	method dataout dataOut;
 	method putA(dataax) enable((*inhigh*) dataaxEnable)
 		reset_by(no_reset) clocked_by(clk);
 	method putB(dataay) enable((*inhigh*) dataayEnable)

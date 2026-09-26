@@ -1,0 +1,54 @@
+{
+  "pass": true,
+  "reference_commit": "5b0a36bbccff30a66f70f337c07f6a1ad4d98c28",
+  "compiler": "BSC 2025.07",
+  "backend": "Bluesim",
+  "weights": "Current frozen PTQ export, identical generated constants and golden fixtures in both builds",
+  "frames": 14,
+  "output_scalars": 798,
+  "total_cycles": 129234,
+  "drain_cycles": 2048,
+  "event_records": 841,
+  "all_event_values_and_cycles_identical": true,
+  "schedule_byte_identical": true,
+  "schedule_rules": 115,
+  "schedule_sha256": "1ecbbfa89604e4def7139981e5860b9ff157c9df3c5ca25af545b98a0e978797",
+  "event_records_sha256": "4e0074d688f659f710f0689679fad650c02eb3c10b9f34f3f7e0fd758902a91d",
+  "source_sha256": {
+    "original": {
+      "SwayBaseline.bsv": "7aa997e2a1e679273138cc720e0c47ce8364e0599897e488c9ab06ecb092865c",
+      "SwayBlock.bsv": "2c2653e70dd58f094be0348d392b6e37711bcc0750344253ac117b484d70fdf4",
+      "SwayLinear.bsv": "18400370202cfb9f30ba79591fb9f57d8af1183aabe0832f7ef3789495274ae9",
+      "SwayNorm.bsv": "db60df465acb0ebc0c21cc60d000b1a375a089b4d0bb6d4070f27e1b88bb1653",
+      "SwayScan.bsv": "c53a29328e263930a5d19acb802f6a941d3fe2f22c708947a78fcf69f2ab1964",
+      "SwayTypes.bsv": "5bc14e0d45f364956f1253d98377eb458b11ca287326e089c62b597118f05c97"
+    },
+    "styled": {
+      "SwayBaseline.bsv": "d72f9af24fb1d308b808062d2b86b058362288cc7a458e38a094a979c3012830",
+      "SwayBlock.bsv": "46b3730d0dbda1624d45713d5130bfe08adc4e9c9cc2eab4cc13f6fe7bbf1ac8",
+      "SwayLinear.bsv": "e5c3a8b442b1500f0d494c6aa4251d67b3f1b0f6cc584d77dc9512ee6ec3042b",
+      "SwayNorm.bsv": "3965cacb7d8124c46010ffefc6ab5fdef340e62f6f0cda5b5be850704ad5e548",
+      "SwayScan.bsv": "72382086c00be30ccfd2e7139129948ef6fa13a6b0e3193ef98dfe73de1d2617",
+      "SwayTypes.bsv": "894fc620e13be4d5096e706d2506898f62f6ae55a4cd1cb202ba41cb5a0cf056"
+    }
+  },
+  "generated_sha256": {
+    "GeneratedTestConfig.bsv": "74aee8f80bda41ec1aef155a909cc21a1810e581b330e0dcd43f251e2c06ffa6",
+    "SwayParameters.bsv": "d3e8d3ae436529cbe7e7c43635dc33607814d5deb6c7db344ba2584ee810531a",
+    "nonlinear_tables.npy": "2bad6648b11e4ff7fa793ee867c81f122df802a6214e9c7b4d304572b97f2a48",
+    "predictions_integer.npy": "334bf6e6f9d8e5df599d61c64bbd19b8c6562672a1cdb2e1f6bb64a4237f1e75",
+    "reference_report.json": "452658600bd2ee8febc66ae04b9db1442866dbab69efc63dac1a9e33e7ffc5cc",
+    "software_contract_verification.json": "1ac3c00c3bd0c2361a3fee7f584a6154fdfc09ce0d3cc6059f9c2fd95e878954",
+    "test_expected.hex": "ee895d85ae7b2eb20b7c17718438623c04252725bd679a093d3c56aa7bdf0214",
+    "test_input.hex": "bff0e0a7e6eb3044228153400ada59360959abb4a4779df584efe15343ed54eb",
+    "test_trace.npz": "616588ef76e7eade26ec1b0a1021687622ee4333a02b8a0598cff382c5734751"
+  },
+  "scope": "Original first-baseline six inference modules and testbench compared against style-migrated current sources on same coefficients. Clock/UART wrapper excluded. Total cycles include testbench bubbles and output stalls, not throughput.",
+  "evidence": {
+    "original_log": "original_bluesim.log",
+    "styled_log": "styled_bluesim.log",
+    "original_schedule": "original.sched",
+    "styled_schedule": "styled.sched",
+    "build_log": "build.log"
+  }
+}

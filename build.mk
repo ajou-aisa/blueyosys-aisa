@@ -40,6 +40,7 @@ POST_RUN ?= :
 EXTRA_BSV_PATHS ?=
 
 BSC ?= bsc
+SIM_BACKEND ?= bluesim
 YOSYS ?= yosys
 PYTHON ?= python3
 PROGRAMMER ?= $(BOARD_PROGRAMMER)
@@ -196,6 +197,7 @@ synth: bitstream
 	@printf 'Bitstream: %s\nYosys report: %s\nnextpnr report: %s\nUtilization report: %s\n' \
 		'$(BITSTREAM)' '$(YOSYS_REPORT_TEXT)' '$(PNR_REPORT_JSON)' '$(UTILIZATION_REPORT)'
 
+ifeq ($(SIM_BACKEND),bluesim)
 bsim: check-bsc
 	rm -rf $(BSIM_DIR)
 	mkdir -p $(BSIM_DIR)
@@ -204,6 +206,20 @@ bsim: check-bsc
 	$(BSC) $(BSCFLAGS_COMMON) $(BSCFLAGS_BSIM) $(DEBUGFLAGS) $(BSIM_CXXFLAGS) \
 		-sim -e $(BSIM_TOP_MODULE) -o $(BSIM_DIR)/bsim \
 		$(BSIM_DIR)/*.ba $(BSIM_CPPFILES)
+
+else ifeq ($(SIM_BACKEND),iverilog)
+bsim: check-bsc
+	@for tool in iverilog vvp; do command -v "$$tool" >/dev/null || { echo "$$tool not found; install Icarus Verilog" >&2; exit 127; }; done
+	rm -rf $(BSIM_DIR)
+	mkdir -p $(BSIM_DIR)
+	$(BSC) $(BSCFLAGS_COMMON) $(DEBUGFLAGS) -D BSIM \
+		-bdir $(BSIM_DIR) -vdir $(BSIM_DIR) -info-dir $(BSIM_DIR) \
+		-p +:$(BSV_PATH) -verilog -u -g $(BSIM_TOP_MODULE) $(BSIM_TOP_SOURCE)
+	$(BSC) -verilog -e $(BSIM_TOP_MODULE) -vsim iverilog \
+		-p +:$(BSV_PATH) -bdir $(BSIM_DIR) -vdir $(BSIM_DIR) -o $(BSIM_DIR)/bsim
+else
+$(error Unsupported SIM_BACKEND=$(SIM_BACKEND); use bluesim or iverilog)
+endif
 
 runsim: bsim
 	cd $(PROJECT_DIR) && $(BSIM_DIR)/bsim 2> output.log | tee system.log

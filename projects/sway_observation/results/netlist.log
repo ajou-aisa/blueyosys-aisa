@@ -1,0 +1,38 @@
+Final synthesis log excerpt; full build log SHA256 is recorded in validation.json.
+
+18.47.2. Analyzing design hierarchy..
+Top module:  \mkTop
+Removed 0 unused modules.
+
+18.48. Printing statistics.
+
+=== mkTop ===
+
+   Number of wires:              64063
+   Number of wire bits:         755855
+   Number of public wires:       64063
+   Number of public wire bits:  755855
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:             165368
+     CCU2C                       34903
+     DP16KD                          4
+     EHXPLLL                         1
+     L6MUX21                      2619
+     LUT4                        68227
+     MULT18X18D                    141
+     PFUMX                        8577
+     TRELLIS_DPR16X4               252
+     TRELLIS_FF                  50644
+
+18.49. Executing CHECK pass (checking for obvious problems).
+Checking module mkTop...
+Found and reported 0 problems.
+
+18.50. Executing JSON backend.
+Warnings: 3 unique messages, 3 total
+End of script. Logfile hash: 6860d8fbb2, CPU: user 528.75s system 10.67s, MEM: 4157.10 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 25% 1x autoname (142 sec), 19% 35x opt_clean (108 sec), ...
+make[1]: Leaving directory '/workspace/scratch/839f8f1063a0/work/blueyosys/projects/sway_observation'

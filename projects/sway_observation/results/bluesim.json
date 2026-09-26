@@ -1,0 +1,154 @@
+{
+  "status": "pass",
+  "evidence": "BSV Bluesim simulation",
+  "frames_checked": 14,
+  "scalar_outputs_checked": 798,
+  "input_words": 4480,
+  "finish_cycle": 129234,
+  "post_completion_drain_cycles": 2048,
+  "source_bubbles": "cycles modulo 17 equal to 0 or 1",
+  "sink_stalls": "8192 cycles after each first output, plus cycles modulo 11 equal to 0",
+  "repeated_frame_pairs_checked": [
+    [
+      0,
+      12
+    ],
+    [
+      0,
+      13
+    ]
+  ],
+  "timing_scope": "testbench cycles include deliberate source and sink stalls; not unstalled kernel performance",
+  "input_sha256": "bff0e0a7e6eb3044228153400ada59360959abb4a4779df584efe15343ed54eb",
+  "expected_sha256": "ee895d85ae7b2eb20b7c17718438623c04252725bd679a093d3c56aa7bdf0214",
+  "log_sha256": "4e0074d688f659f710f0689679fad650c02eb3c10b9f34f3f7e0fd758902a91d",
+  "sway_records_sha256": "4e0074d688f659f710f0689679fad650c02eb3c10b9f34f3f7e0fd758902a91d",
+  "frames": [
+    {
+      "frame": 0,
+      "input_first_cycle": 2,
+      "input_last_cycle": 363,
+      "output_first_cycle": 11620,
+      "output_last_cycle": 19873,
+      "first_input_to_last_output_cycles": 19871,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 1,
+      "input_first_cycle": 364,
+      "input_last_cycle": 725,
+      "output_first_cycle": 19874,
+      "output_last_cycle": 28128,
+      "first_input_to_last_output_cycles": 27764,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 2,
+      "input_first_cycle": 726,
+      "input_last_cycle": 1087,
+      "output_first_cycle": 28129,
+      "output_last_cycle": 36383,
+      "first_input_to_last_output_cycles": 35657,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 3,
+      "input_first_cycle": 1090,
+      "input_last_cycle": 5207,
+      "output_first_cycle": 36384,
+      "output_last_cycle": 44637,
+      "first_input_to_last_output_cycles": 43547,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 4,
+      "input_first_cycle": 5208,
+      "input_last_cycle": 11957,
+      "output_first_cycle": 44639,
+      "output_last_cycle": 52893,
+      "first_input_to_last_output_cycles": 47685,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 5,
+      "input_first_cycle": 11958,
+      "input_last_cycle": 18709,
+      "output_first_cycle": 52894,
+      "output_last_cycle": 61147,
+      "first_input_to_last_output_cycles": 49189,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 6,
+      "input_first_cycle": 18710,
+      "input_last_cycle": 25461,
+      "output_first_cycle": 61148,
+      "output_last_cycle": 69402,
+      "first_input_to_last_output_cycles": 50692,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 7,
+      "input_first_cycle": 25462,
+      "input_last_cycle": 32213,
+      "output_first_cycle": 69403,
+      "output_last_cycle": 77656,
+      "first_input_to_last_output_cycles": 52194,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 8,
+      "input_first_cycle": 32214,
+      "input_last_cycle": 38967,
+      "output_first_cycle": 77657,
+      "output_last_cycle": 85911,
+      "first_input_to_last_output_cycles": 53697,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 9,
+      "input_first_cycle": 38968,
+      "input_last_cycle": 45718,
+      "output_first_cycle": 85912,
+      "output_last_cycle": 94166,
+      "first_input_to_last_output_cycles": 55198,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 10,
+      "input_first_cycle": 45719,
+      "input_last_cycle": 52469,
+      "output_first_cycle": 94167,
+      "output_last_cycle": 102420,
+      "first_input_to_last_output_cycles": 56701,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 11,
+      "input_first_cycle": 52470,
+      "input_last_cycle": 59221,
+      "output_first_cycle": 102422,
+      "output_last_cycle": 110676,
+      "first_input_to_last_output_cycles": 58206,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 12,
+      "input_first_cycle": 59222,
+      "input_last_cycle": 65973,
+      "output_first_cycle": 110677,
+      "output_last_cycle": 118930,
+      "first_input_to_last_output_cycles": 59708,
+      "sink_pause_cycles": 8192
+    },
+    {
+      "frame": 13,
+      "input_first_cycle": 65974,
+      "input_last_cycle": 72725,
+      "output_first_cycle": 118931,
+      "output_last_cycle": 127185,
+      "first_input_to_last_output_cycles": 61211,
+      "sink_pause_cycles": 8192
+    }
+  ]
+}

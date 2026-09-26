@@ -1,0 +1,16 @@
+{
+  "command": [
+    "make",
+    "-C",
+    "projects/sway_observation",
+    "pnr",
+    "BOARD=ulx3s-85f",
+    "-o",
+    "netlist"
+  ],
+  "working_directory": "blueyosys repository root",
+  "netlist_reused": true,
+  "nextpnr_version": "\"nextpnr-ecp5\" -- Next Generation Place and Route (Version nextpnr-0.11.1-31-g3edea68e)",
+  "exit_code": 2,
+  "elapsed_seconds": 78.25486731529236
+}

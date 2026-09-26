@@ -1,0 +1,39 @@
+{
+  "source_commits": {
+    "sway": "07df0ef55f47f78c916ce5955154ec9d41555cb9",
+    "blueyosys": "c96c1edccf669afda807f9353d3462d28eaa73f4"
+  },
+  "inputs_sha256": {
+    "netlist": "cdffdbb15179098662f838ee11dc9044f3b0feebd6eda8a7acf1dd49632e5cad",
+    "constraints": "93db29a950de4064ed124a09b8175ea9034bab8c6ef50f849167a42bd04c8bea",
+    "board_profile": "742d4e323fd9cd0545051539b06d552d617aec6bd0930d4bb0b9316b100fc0ad",
+    "project_makefile": "2c1c90b79b0c026dc220423ccbe27699c98ba0b9880c1041006ee8860df66ff8",
+    "shared_build": "7899a5aa8e35ad6896b12d564318cf613e8cc48e89b85ba6b75f3042de83d320",
+    "checkpoint": "866604ec36154035d4f23f9c9ff246657772af06bad2a626cf43bd6420fb22e7"
+  },
+  "source_sha256": {
+    "HwMain.bsv": "4a2a3ddb9cb8a6ce9e15658d56f768b7e1e7fee279055a9dca389bfb942c02cc",
+    "Makefile": "2c1c90b79b0c026dc220423ccbe27699c98ba0b9880c1041006ee8860df66ff8",
+    "Top.bsv": "1cb798e89d1f070b567c57aef9ed6dc3ed02687cad76928fa975b991235f7797",
+    "bsv/SwayBaseline.bsv": "d72f9af24fb1d308b808062d2b86b058362288cc7a458e38a094a979c3012830",
+    "bsv/SwayBlock.bsv": "46b3730d0dbda1624d45713d5130bfe08adc4e9c9cc2eab4cc13f6fe7bbf1ac8",
+    "bsv/SwayClock.bsv": "0837c9f0c98e67e2b933a3d411342a05e4f15fd36f03ac44f297e871cc652c81",
+    "bsv/SwayLinear.bsv": "e5c3a8b442b1500f0d494c6aa4251d67b3f1b0f6cc584d77dc9512ee6ec3042b",
+    "bsv/SwayNorm.bsv": "3965cacb7d8124c46010ffefc6ab5fdef340e62f6f0cda5b5be850704ad5e548",
+    "bsv/SwayScan.bsv": "72382086c00be30ccfd2e7139129948ef6fa13a6b0e3193ef98dfe73de1d2617",
+    "bsv/SwayTypes.bsv": "894fc620e13be4d5096e706d2506898f62f6ae55a4cd1cb202ba41cb5a0cf056",
+    "generated/GeneratedTestConfig.bsv": "74aee8f80bda41ec1aef155a909cc21a1810e581b330e0dcd43f251e2c06ffa6",
+    "generated/SwayParameters.bsv": "d3e8d3ae436529cbe7e7c43635dc33607814d5deb6c7db344ba2584ee810531a",
+    "generated/test_expected.hex": "ee895d85ae7b2eb20b7c17718438623c04252725bd679a093d3c56aa7bdf0214",
+    "generated/test_input.hex": "bff0e0a7e6eb3044228153400ada59360959abb4a4779df584efe15343ed54eb",
+    "reference/check_sim.py": "bc4afcf865ade4878f69a0d27f3a1da347ea31d226983370ca1a76152638df36",
+    "reference/generate.py": "ec1241c1790ec0ab52a7f6ec828728fd96a165d2ea22962865a72d9ab5938f78",
+    "reference/integer_model.py": "62d8f5f99e9a95e1f784662f98a283db0b7660297be3b1a0182cb08ae3236ee9",
+    "sim/TbSway.bsv": "8bc228c8fcb5933c40c19bdd70e7ae2dd8411d80c6ba1c2d0fd3d75f3a98c1d5"
+  },
+  "board": "ulx3s-85f",
+  "package": "CABGA381",
+  "core_target_mhz": 100,
+  "input_clock_mhz": 25,
+  "method": "Reuse the hash-verified existing netlist; execute the unchanged blueYosys pnr recipe with make -o netlist."
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "checkpointSHA256": "866604ec36154035d4f23f9c9ff246657772af06bad2a626cf43bd6420fb22e7",
+  "sourceCommit": "ecb38e7f4c645052111a65c015c3e821bce96bcc",
+  "sourceSHA256": {
+    "sw/model.py": "9728619a1a1be6a852631f9ba77bcdca3502610937001a6f742c5e5a4de0b55c",
+    "sw/quantize.py": "15c8bd4f77a725edc4039176c9e417d56e1a4da9f3490418f0d1fe485484c4b8"
+  },
+  "referenceSHA256": {
+    "reference/generate.py": "ec1241c1790ec0ab52a7f6ec828728fd96a165d2ea22962865a72d9ab5938f78",
+    "reference/integer_model.py": "62d8f5f99e9a95e1f784662f98a283db0b7660297be3b1a0182cb08ae3236ee9"
+  },
+  "nonlinearTableSHA256": "2bad6648b11e4ff7fa793ee867c81f122df802a6214e9c7b4d304572b97f2a48",
+  "nonlinearVerification": {
+    "entries": 1536,
+    "float32PWLValuesMatch": true,
+    "int8TableEntriesMatch": true,
+    "knotSource": "Frozen PTQ profile, checked against checkpoint config and export manifest"
+  },
+  "normalizationIsolation": {
+    "frames": 7984,
+    "totalOutputElements": 455088,
+    "integerVersusSwWithOnlyNormalizationReplacedMatches": 455088,
+    "currentSwVersusSavedQDQMatches": 455088,
+    "result": "Every integer output matches the PTQ software graph after replacing only float32 range normalization with exact rational normalization"
+  },
+  "testUsedForTuning": false,
+  "portableGeneration": {
+    "sourceTreeAvailable": false,
+    "rawDatasetAvailable": false,
+    "checkpointOrCalibrationChanged": false,
+    "byteExactArtifacts": [
+      "SwayParameters.bsv",
+      "GeneratedTestConfig.bsv",
+      "nonlinear_tables.npy",
+      "test_input.hex",
+      "test_expected.hex",
+      "test_trace.npz"
+    ],
+    "result": "Standalone generation in a temporary project directory reproduced all six artifacts byte for byte"
+  }
+}

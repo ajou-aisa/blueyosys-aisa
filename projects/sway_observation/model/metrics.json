@@ -1,0 +1,79 @@
+{
+  "quantization_method": "PTQ",
+  "checkpoint_sha256": "866604ec36154035d4f23f9c9ff246657772af06bad2a626cf43bd6420fb22e7",
+  "source_checkpoint_sha256": "e3615a6133bad48594a99f20f0387074e8416a94f029bbe5e62dafdb579ab134",
+  "ptq_profile_sha256": "6dce3f0e773579c99977250363ece401ab57336c7d37f2109656c7c8c39dd180",
+  "selection": "Frozen full-validation selection; test is used only for final reporting",
+  "test_used_for_selection": false,
+  "test_frames": 7984,
+  "parameter_count": 15717,
+  "dataset_test_sha256": {
+    "featuremap_test.npy": "331551d42039e97a0afc260029d605dec29f4a0d11ede65e4c1328c49cb5c145",
+    "labels_test.npy": "a1f29ebee5d5b4a63810997e9eda811af97bd222dcf4d4766777ccaea1b256e8"
+  },
+  "evaluation_source_sha256": {
+    "evaluate_ptq.py": "7984537d49a626d7db2c304a0193362b24a126603883c3d003cc37e0901120cf",
+    "train.py": "0a6a43a14a7ce426387f5bc7215bd867aa3b331fbc27cddb1a885703e839a009",
+    "model.py": "9728619a1a1be6a852631f9ba77bcdca3502610937001a6f742c5e5a4de0b55c",
+    "quantize.py": "15c8bd4f77a725edc4039176c9e417d56e1a4da9f3490418f0d1fe485484c4b8"
+  },
+  "metrics": {
+    "fp32": {
+      "frames": 7984,
+      "mae_cm": 5.853564531189892,
+      "rmse_coordinate_mean_cm": 8.068096948153178,
+      "rmse_global_cm": 8.755268570961288,
+      "axis_mae_cm": {
+        "x": 7.0017243811117265,
+        "y": 3.5694157346562863,
+        "z": 6.98955347780166
+      },
+      "axis_rmse_cm": {
+        "x": 9.791338887762521,
+        "y": 5.064722856639226,
+        "z": 9.348229100057786
+      },
+      "evaluation_seconds": 0.5451834359992063
+    },
+    "fp32_pwl": {
+      "frames": 7984,
+      "mae_cm": 5.864741176358556,
+      "rmse_coordinate_mean_cm": 8.075390595595648,
+      "rmse_global_cm": 8.755967860959753,
+      "axis_mae_cm": {
+        "x": 6.9916855118761445,
+        "y": 3.607556873368835,
+        "z": 6.994981143830688
+      },
+      "axis_rmse_cm": {
+        "x": 9.777989182995956,
+        "y": 5.096908755184953,
+        "z": 9.351273848606038
+      },
+      "evaluation_seconds": 2.554406363000453
+    },
+    "int8_ptq": {
+      "frames": 7984,
+      "mae_cm": 6.10705499712151,
+      "rmse_coordinate_mean_cm": 8.356373500431944,
+      "rmse_global_cm": 8.998808838575384,
+      "axis_mae_cm": {
+        "x": 7.219886161696558,
+        "y": 3.9595027907137856,
+        "z": 7.141776038954185
+      },
+      "axis_rmse_cm": {
+        "x": 10.022033774356297,
+        "y": 5.541711310039382,
+        "z": 9.505375416900158
+      },
+      "evaluation_seconds": 4.366919174999566
+    }
+  },
+  "quantization_scope": "INT8 affine and convolution operands with INT64 reference MACs; integer SSM recurrence; normalization/nonlinearities/remaining elementwise graph use quantize-dequantize simulation; no RTL validation",
+  "verification": {
+    "bundle_roundtrip_exact": true,
+    "integer_exports_match_checkpoint": true,
+    "new_rtl_validation": false
+  }
+}

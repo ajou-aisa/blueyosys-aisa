@@ -1,0 +1,784 @@
+=== Generated schedule for mkTbSway ===
+
+Rule schedule
+-------------
+Rule: dut_embedding_process1
+Predicate: dut_embedding_inputQ.i_notEmpty && (! dut_embedding_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_embedding_process2
+Predicate: dut_embedding_productQ.i_notFull &&
+	   dut_embedding_activeOn && dut_embedding_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_embedding_process3
+Predicate: dut_embedding_productQ.i_notEmpty &&
+	   dut_embedding_activeOn && (! dut_embedding_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_embedding_process3Last
+Predicate: dut_embedding_productQ.i_notEmpty &&
+	   dut_embedding_sumQ.i_notFull &&
+	   dut_embedding_activeOn && (! dut_embedding_issueOn) &&
+	   dut_embedding_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_embedding_process4
+Predicate: dut_embedding_sumQ.i_notEmpty &&
+	   ((! (dut_embedding_sumQ.first[6:0] == 7'd4)) ||
+	    dut_embedding_outputQ.i_notFull) &&
+	   dut_embedding_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_normalization_process1
+Predicate: dut_block0_normalization_inputQ.i_notEmpty &&
+	   (! dut_block0_normalization_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_normalization_process2
+Predicate: dut_block0_normalization_activeOn &&
+	   (! dut_block0_normalization_statisticsDone)
+Blocking rules: (none)
+ 
+Rule: dut_block0_normalization_process3
+Predicate: dut_block0_normalization_activeOn &&
+	   dut_block0_normalization_statisticsDone &&
+	   (! dut_block0_normalization_divideOn) &&
+	   (! dut_block0_normalization_roundOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_normalization_process4
+Predicate: dut_block0_normalization_activeOn &&
+	   dut_block0_normalization_divideOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_normalization_process5
+Predicate: ((! (dut_block0_normalization_groupCnt == 4'd9)) ||
+	    dut_block0_normalization_outputQ.i_notFull) &&
+	   dut_block0_normalization_activeOn &&
+	   dut_block0_normalization_roundOn &&
+	   (! dut_block0_normalization_divideOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_inputProjection_process1
+Predicate: dut_block0_inputProjection_inputQ.i_notEmpty &&
+	   (! dut_block0_inputProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_inputProjection_process2
+Predicate: dut_block0_inputProjection_productQ.i_notFull &&
+	   dut_block0_inputProjection_activeOn &&
+	   dut_block0_inputProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_inputProjection_process3
+Predicate: dut_block0_inputProjection_productQ.i_notEmpty &&
+	   dut_block0_inputProjection_activeOn &&
+	   (! dut_block0_inputProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block0_inputProjection_process3Last
+Predicate: dut_block0_inputProjection_productQ.i_notEmpty &&
+	   dut_block0_inputProjection_sumQ.i_notFull &&
+	   dut_block0_inputProjection_activeOn &&
+	   (! dut_block0_inputProjection_issueOn) &&
+	   dut_block0_inputProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block0_inputProjection_process4
+Predicate: dut_block0_inputProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block0_inputProjection_sumQ.first[6:0] == 7'd19)) ||
+	    dut_block0_inputProjection_outputQ.i_notFull) &&
+	   dut_block0_inputProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_stateProjection_process1
+Predicate: dut_block0_stateProjection_inputQ.i_notEmpty &&
+	   (! dut_block0_stateProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_stateProjection_process2
+Predicate: dut_block0_stateProjection_productQ.i_notFull &&
+	   dut_block0_stateProjection_activeOn &&
+	   dut_block0_stateProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_stateProjection_process3
+Predicate: dut_block0_stateProjection_productQ.i_notEmpty &&
+	   dut_block0_stateProjection_activeOn &&
+	   (! dut_block0_stateProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block0_stateProjection_process3Last
+Predicate: dut_block0_stateProjection_productQ.i_notEmpty &&
+	   dut_block0_stateProjection_sumQ.i_notFull &&
+	   dut_block0_stateProjection_activeOn &&
+	   (! dut_block0_stateProjection_issueOn) &&
+	   dut_block0_stateProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block0_stateProjection_process4
+Predicate: dut_block0_stateProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block0_stateProjection_sumQ.first[6:0] == 7'd4)) ||
+	    dut_block0_stateProjection_outputQ.i_notFull) &&
+	   dut_block0_stateProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_deltaProjection_process1
+Predicate: dut_block0_deltaProjection_inputQ.i_notEmpty &&
+	   (! dut_block0_deltaProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_deltaProjection_process2
+Predicate: dut_block0_deltaProjection_productQ.i_notFull &&
+	   dut_block0_deltaProjection_activeOn &&
+	   dut_block0_deltaProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_deltaProjection_process3
+Predicate: dut_block0_deltaProjection_productQ.i_notEmpty &&
+	   dut_block0_deltaProjection_activeOn &&
+	   (! dut_block0_deltaProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block0_deltaProjection_process3Last
+Predicate: dut_block0_deltaProjection_productQ.i_notEmpty &&
+	   dut_block0_deltaProjection_sumQ.i_notFull &&
+	   dut_block0_deltaProjection_activeOn &&
+	   (! dut_block0_deltaProjection_issueOn) &&
+	   dut_block0_deltaProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block0_deltaProjection_process4
+Predicate: dut_block0_deltaProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block0_deltaProjection_sumQ.first[6:0] == 7'd9)) ||
+	    dut_block0_deltaProjection_outputQ.i_notFull) &&
+	   dut_block0_deltaProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_outputProjection_process1
+Predicate: dut_block0_outputProjection_inputQ.i_notEmpty &&
+	   (! dut_block0_outputProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_outputProjection_process2
+Predicate: dut_block0_outputProjection_productQ.i_notFull &&
+	   dut_block0_outputProjection_activeOn &&
+	   dut_block0_outputProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_outputProjection_process3
+Predicate: dut_block0_outputProjection_productQ.i_notEmpty &&
+	   dut_block0_outputProjection_activeOn &&
+	   (! dut_block0_outputProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block0_outputProjection_process3Last
+Predicate: dut_block0_outputProjection_productQ.i_notEmpty &&
+	   dut_block0_outputProjection_sumQ.i_notFull &&
+	   dut_block0_outputProjection_activeOn &&
+	   (! dut_block0_outputProjection_issueOn) &&
+	   dut_block0_outputProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block0_outputProjection_process4
+Predicate: dut_block0_outputProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block0_outputProjection_sumQ.first[6:0] == 7'd4)) ||
+	    dut_block0_outputProjection_outputQ.i_notFull) &&
+	   dut_block0_outputProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_scan_process1
+Predicate: dut_block0_scan_inputQ.i_notEmpty && (! dut_block0_scan_processOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_scan_process2
+Predicate: dut_block0_scan_preparedQ.i_notFull &&
+	   dut_block0_scan_processOn && (dut_block0_scan_groupCnt < 8'd160)
+Blocking rules: (none)
+ 
+Rule: dut_block0_scan_process3
+Predicate: dut_block0_scan_preparedQ.i_notEmpty &&
+	   dut_block0_scan_currentQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_scan_process4
+Predicate: dut_block0_scan_currentQ.i_notEmpty &&
+	   dut_block0_scan_partialQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_scan_process5
+Predicate: dut_block0_scan_partialQ.i_notEmpty &&
+	   ((! (dut_block0_scan_partialQ.first[50:49] == 2'd3)) ||
+	    (! (dut_block0_scan_partialQ.first[56:51] == 6'd39)) ||
+	    dut_block0_scan_outputQ.i_notFull) &&
+	   dut_block0_scan_processOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_process1
+Predicate: dut_block0_inputQ.i_notEmpty &&
+	   dut_block0_normalization_inputQ.i_notFull &&
+	   dut_block0_residualQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_process2
+Predicate: dut_block0_normalization_outputQ.i_notEmpty &&
+	   dut_block0_inputProjection_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_process3
+Predicate: dut_block0_inputProjection_outputQ.i_notEmpty &&
+	   dut_block0_expandedQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_process4_1
+Predicate: dut_block0_expandedQ.i_notEmpty && (! dut_block0_convolutionOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_process4_2
+Predicate: dut_block0_convolvedQ.i_notFull &&
+	   dut_block0_convolutionOn && (dut_block0_convGroupCnt < 5'd20)
+Blocking rules: (none)
+ 
+Rule: dut_block0_process4_3
+Predicate: dut_block0_convolvedQ.i_notEmpty &&
+	   ((! (dut_block0_convolvedQ.first[56:52] == 5'd19)) ||
+	    (dut_block0_activatedQ.i_notFull &&
+	     dut_block0_gateDelayQ.i_notFull)) &&
+	   dut_block0_convolutionOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_process5
+Predicate: dut_block0_activatedQ.i_notEmpty &&
+	   dut_block0_stateProjection_inputQ.i_notFull &&
+	   dut_block0_xDelayQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_process6
+Predicate: dut_block0_stateProjection_outputQ.i_notEmpty &&
+	   dut_block0_deltaProjection_inputQ.i_notFull &&
+	   dut_block0_stateParameterQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_process7
+Predicate: dut_block0_deltaProjection_outputQ.i_notEmpty &&
+	   dut_block0_xDelayQ.i_notEmpty &&
+	   dut_block0_stateParameterQ.i_notEmpty &&
+	   dut_block0_scan_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block0_process8
+Predicate: dut_block0_scan_outputQ.i_notEmpty &&
+	   dut_block0_gateDelayQ.i_notEmpty &&
+	   (! dut_block0_gatingOn)
+Blocking rules: (none)
+ 
+Rule: dut_block0_process9
+Predicate: ((! (dut_block0_gateGroupCnt == 5'd19)) ||
+	    dut_block0_outputProjection_inputQ.i_notFull) &&
+	   dut_block0_gatingOn
+Blocking rules: (none)
+ 
+Rule: dut_block0_process10
+Predicate: dut_block0_outputProjection_outputQ.i_notEmpty &&
+	   dut_block0_residualQ.i_notEmpty && dut_block0_outputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_normalization_process1
+Predicate: dut_block1_normalization_inputQ.i_notEmpty &&
+	   (! dut_block1_normalization_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_normalization_process2
+Predicate: dut_block1_normalization_activeOn &&
+	   (! dut_block1_normalization_statisticsDone)
+Blocking rules: (none)
+ 
+Rule: dut_block1_normalization_process3
+Predicate: dut_block1_normalization_activeOn &&
+	   dut_block1_normalization_statisticsDone &&
+	   (! dut_block1_normalization_divideOn) &&
+	   (! dut_block1_normalization_roundOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_normalization_process4
+Predicate: dut_block1_normalization_activeOn &&
+	   dut_block1_normalization_divideOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_normalization_process5
+Predicate: ((! (dut_block1_normalization_groupCnt == 4'd9)) ||
+	    dut_block1_normalization_outputQ.i_notFull) &&
+	   dut_block1_normalization_activeOn &&
+	   dut_block1_normalization_roundOn &&
+	   (! dut_block1_normalization_divideOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_inputProjection_process1
+Predicate: dut_block1_inputProjection_inputQ.i_notEmpty &&
+	   (! dut_block1_inputProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_inputProjection_process2
+Predicate: dut_block1_inputProjection_productQ.i_notFull &&
+	   dut_block1_inputProjection_activeOn &&
+	   dut_block1_inputProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_inputProjection_process3
+Predicate: dut_block1_inputProjection_productQ.i_notEmpty &&
+	   dut_block1_inputProjection_activeOn &&
+	   (! dut_block1_inputProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block1_inputProjection_process3Last
+Predicate: dut_block1_inputProjection_productQ.i_notEmpty &&
+	   dut_block1_inputProjection_sumQ.i_notFull &&
+	   dut_block1_inputProjection_activeOn &&
+	   (! dut_block1_inputProjection_issueOn) &&
+	   dut_block1_inputProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block1_inputProjection_process4
+Predicate: dut_block1_inputProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block1_inputProjection_sumQ.first[6:0] == 7'd19)) ||
+	    dut_block1_inputProjection_outputQ.i_notFull) &&
+	   dut_block1_inputProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_stateProjection_process1
+Predicate: dut_block1_stateProjection_inputQ.i_notEmpty &&
+	   (! dut_block1_stateProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_stateProjection_process2
+Predicate: dut_block1_stateProjection_productQ.i_notFull &&
+	   dut_block1_stateProjection_activeOn &&
+	   dut_block1_stateProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_stateProjection_process3
+Predicate: dut_block1_stateProjection_productQ.i_notEmpty &&
+	   dut_block1_stateProjection_activeOn &&
+	   (! dut_block1_stateProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block1_stateProjection_process3Last
+Predicate: dut_block1_stateProjection_productQ.i_notEmpty &&
+	   dut_block1_stateProjection_sumQ.i_notFull &&
+	   dut_block1_stateProjection_activeOn &&
+	   (! dut_block1_stateProjection_issueOn) &&
+	   dut_block1_stateProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block1_stateProjection_process4
+Predicate: dut_block1_stateProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block1_stateProjection_sumQ.first[6:0] == 7'd4)) ||
+	    dut_block1_stateProjection_outputQ.i_notFull) &&
+	   dut_block1_stateProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_deltaProjection_process1
+Predicate: dut_block1_deltaProjection_inputQ.i_notEmpty &&
+	   (! dut_block1_deltaProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_deltaProjection_process2
+Predicate: dut_block1_deltaProjection_productQ.i_notFull &&
+	   dut_block1_deltaProjection_activeOn &&
+	   dut_block1_deltaProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_deltaProjection_process3
+Predicate: dut_block1_deltaProjection_productQ.i_notEmpty &&
+	   dut_block1_deltaProjection_activeOn &&
+	   (! dut_block1_deltaProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block1_deltaProjection_process3Last
+Predicate: dut_block1_deltaProjection_productQ.i_notEmpty &&
+	   dut_block1_deltaProjection_sumQ.i_notFull &&
+	   dut_block1_deltaProjection_activeOn &&
+	   (! dut_block1_deltaProjection_issueOn) &&
+	   dut_block1_deltaProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block1_deltaProjection_process4
+Predicate: dut_block1_deltaProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block1_deltaProjection_sumQ.first[6:0] == 7'd9)) ||
+	    dut_block1_deltaProjection_outputQ.i_notFull) &&
+	   dut_block1_deltaProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_outputProjection_process1
+Predicate: dut_block1_outputProjection_inputQ.i_notEmpty &&
+	   (! dut_block1_outputProjection_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_outputProjection_process2
+Predicate: dut_block1_outputProjection_productQ.i_notFull &&
+	   dut_block1_outputProjection_activeOn &&
+	   dut_block1_outputProjection_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_outputProjection_process3
+Predicate: dut_block1_outputProjection_productQ.i_notEmpty &&
+	   dut_block1_outputProjection_activeOn &&
+	   (! dut_block1_outputProjection_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_block1_outputProjection_process3Last
+Predicate: dut_block1_outputProjection_productQ.i_notEmpty &&
+	   dut_block1_outputProjection_sumQ.i_notFull &&
+	   dut_block1_outputProjection_activeOn &&
+	   (! dut_block1_outputProjection_issueOn) &&
+	   dut_block1_outputProjection_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_block1_outputProjection_process4
+Predicate: dut_block1_outputProjection_sumQ.i_notEmpty &&
+	   ((! (dut_block1_outputProjection_sumQ.first[6:0] == 7'd4)) ||
+	    dut_block1_outputProjection_outputQ.i_notFull) &&
+	   dut_block1_outputProjection_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_scan_process1
+Predicate: dut_block1_scan_inputQ.i_notEmpty && (! dut_block1_scan_processOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_scan_process2
+Predicate: dut_block1_scan_preparedQ.i_notFull &&
+	   dut_block1_scan_processOn && (dut_block1_scan_groupCnt < 8'd160)
+Blocking rules: (none)
+ 
+Rule: dut_block1_scan_process3
+Predicate: dut_block1_scan_preparedQ.i_notEmpty &&
+	   dut_block1_scan_currentQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_scan_process4
+Predicate: dut_block1_scan_currentQ.i_notEmpty &&
+	   dut_block1_scan_partialQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_scan_process5
+Predicate: dut_block1_scan_partialQ.i_notEmpty &&
+	   ((! (dut_block1_scan_partialQ.first[50:49] == 2'd3)) ||
+	    (! (dut_block1_scan_partialQ.first[56:51] == 6'd39)) ||
+	    dut_block1_scan_outputQ.i_notFull) &&
+	   dut_block1_scan_processOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_process1
+Predicate: dut_block1_inputQ.i_notEmpty &&
+	   dut_block1_normalization_inputQ.i_notFull &&
+	   dut_block1_residualQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_process2
+Predicate: dut_block1_normalization_outputQ.i_notEmpty &&
+	   dut_block1_inputProjection_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_process3
+Predicate: dut_block1_inputProjection_outputQ.i_notEmpty &&
+	   dut_block1_expandedQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_process4_1
+Predicate: dut_block1_expandedQ.i_notEmpty && (! dut_block1_convolutionOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_process4_2
+Predicate: dut_block1_convolvedQ.i_notFull &&
+	   dut_block1_convolutionOn && (dut_block1_convGroupCnt < 5'd20)
+Blocking rules: (none)
+ 
+Rule: dut_block1_process4_3
+Predicate: dut_block1_convolvedQ.i_notEmpty &&
+	   ((! (dut_block1_convolvedQ.first[56:52] == 5'd19)) ||
+	    (dut_block1_activatedQ.i_notFull &&
+	     dut_block1_gateDelayQ.i_notFull)) &&
+	   dut_block1_convolutionOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_process5
+Predicate: dut_block1_activatedQ.i_notEmpty &&
+	   dut_block1_stateProjection_inputQ.i_notFull &&
+	   dut_block1_xDelayQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_process6
+Predicate: dut_block1_stateProjection_outputQ.i_notEmpty &&
+	   dut_block1_deltaProjection_inputQ.i_notFull &&
+	   dut_block1_stateParameterQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_process7
+Predicate: dut_block1_deltaProjection_outputQ.i_notEmpty &&
+	   dut_block1_xDelayQ.i_notEmpty &&
+	   dut_block1_stateParameterQ.i_notEmpty &&
+	   dut_block1_scan_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_block1_process8
+Predicate: dut_block1_scan_outputQ.i_notEmpty &&
+	   dut_block1_gateDelayQ.i_notEmpty &&
+	   (! dut_block1_gatingOn)
+Blocking rules: (none)
+ 
+Rule: dut_block1_process9
+Predicate: ((! (dut_block1_gateGroupCnt == 5'd19)) ||
+	    dut_block1_outputProjection_inputQ.i_notFull) &&
+	   dut_block1_gatingOn
+Blocking rules: (none)
+ 
+Rule: dut_block1_process10
+Predicate: dut_block1_outputProjection_outputQ.i_notEmpty &&
+	   dut_block1_residualQ.i_notEmpty && dut_block1_outputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_headHidden_process1
+Predicate: dut_headHidden_inputQ.i_notEmpty && (! dut_headHidden_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_headHidden_process2
+Predicate: dut_headHidden_productQ.i_notFull &&
+	   dut_headHidden_activeOn && dut_headHidden_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_headHidden_process3
+Predicate: dut_headHidden_productQ.i_notEmpty &&
+	   dut_headHidden_activeOn && (! dut_headHidden_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_headHidden_process3Last
+Predicate: dut_headHidden_productQ.i_notEmpty &&
+	   dut_headHidden_sumQ.i_notFull &&
+	   dut_headHidden_activeOn && (! dut_headHidden_issueOn) &&
+	   dut_headHidden_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_headHidden_process4
+Predicate: dut_headHidden_sumQ.i_notEmpty &&
+	   ((! (dut_headHidden_sumQ.first[6:0] == 7'd4)) ||
+	    dut_headHidden_outputQ.i_notFull) &&
+	   dut_headHidden_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_headOutput_process1
+Predicate: dut_headOutput_inputQ.i_notEmpty && (! dut_headOutput_activeOn)
+Blocking rules: (none)
+ 
+Rule: dut_headOutput_process2
+Predicate: dut_headOutput_productQ.i_notFull &&
+	   dut_headOutput_activeOn && dut_headOutput_issueOn
+Blocking rules: (none)
+ 
+Rule: dut_headOutput_process3
+Predicate: dut_headOutput_productQ.i_notEmpty &&
+	   dut_headOutput_activeOn && (! dut_headOutput_productQ.first[0])
+Blocking rules: (none)
+ 
+Rule: dut_headOutput_process3Last
+Predicate: dut_headOutput_productQ.i_notEmpty &&
+	   dut_headOutput_sumQ.i_notFull &&
+	   dut_headOutput_activeOn && (! dut_headOutput_issueOn) &&
+	   dut_headOutput_productQ.first[0]
+Blocking rules: (none)
+ 
+Rule: dut_headOutput_process4
+Predicate: dut_headOutput_sumQ.i_notEmpty &&
+	   ((! (dut_headOutput_sumQ.first[6:0] == 7'd14)) ||
+	    dut_headOutput_outputQ.i_notFull) &&
+	   dut_headOutput_activeOn
+Blocking rules: (none)
+ 
+Rule: dut_process1
+Predicate: dut_inputQ.i_notEmpty &&
+	   ((! (dut_inputCnt == 9'd319)) || dut_frameQ.i_notFull)
+Blocking rules: (none)
+ 
+Rule: dut_process2
+Predicate: dut_frameQ.i_notEmpty && (! dut_patchOn)
+Blocking rules: (none)
+ 
+Rule: dut_process3
+Predicate: dut_embedding_inputQ.i_notFull && dut_patchOn
+Blocking rules: (none)
+ 
+Rule: dut_process4
+Predicate: dut_embedding_outputQ.i_notEmpty && dut_block0_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_process5
+Predicate: dut_block0_outputQ.i_notEmpty && dut_block1_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_process6
+Predicate: dut_block1_outputQ.i_notEmpty &&
+	   ((! (dut_block1_outputQ.first[163:160] == 4'd15)) ||
+	    dut_headHidden_inputQ.i_notFull)
+Blocking rules: (none)
+ 
+Rule: dut_process7
+Predicate: dut_headHidden_outputQ.i_notEmpty &&
+	   dut_headOutput_inputQ.i_notFull
+Blocking rules: (none)
+ 
+Rule: dut_process8
+Predicate: dut_headOutput_outputQ.i_notEmpty && (! dut_outputOn)
+Blocking rules: (none)
+ 
+Rule: dut_process9
+Predicate: dut_outputQ.i_notFull && dut_outputOn
+Blocking rules: (none)
+ 
+Rule: tick
+Predicate: True
+Blocking rules: (none)
+ 
+Rule: watchdog
+Predicate: ! (cycleCnt <= 64'd14000000)
+Blocking rules: (none)
+ 
+Rule: process1
+Predicate: dut_inputQ.i_notFull &&
+	   (sentCnt < 32'd4480) && (! ((cycleCnt % 64'd17) <= 64'd1))
+Blocking rules: (none)
+ 
+Rule: process2
+Predicate: dut_outputQ.i_notEmpty &&
+	   (! finishOn) && (! (cycleCnt < pauseUntilR)) &&
+	   (! ((cycleCnt % 64'd11) == 64'd0))
+Blocking rules: (none)
+ 
+Rule: process3
+Predicate: dut_outputQ.i_notEmpty && finishOn
+Blocking rules: (none)
+ 
+Rule: process4
+Predicate: finishOn && (drainCnt < 32'd2048)
+Blocking rules: (none)
+ 
+Rule: process5
+Predicate: finishOn && (drainCnt == 32'd2048)
+Blocking rules: (none)
+ 
+Logical execution order: watchdog,
+			 process2,
+			 process3,
+			 process4,
+			 process5,
+			 process1,
+			 tick,
+			 dut_process1,
+			 dut_process2,
+			 dut_process3,
+			 dut_process4,
+			 dut_process5,
+			 dut_process6,
+			 dut_process7,
+			 dut_process8,
+			 dut_process9,
+			 dut_embedding_process1,
+			 dut_embedding_process2,
+			 dut_embedding_process3,
+			 dut_embedding_process3Last,
+			 dut_embedding_process4,
+			 dut_block0_process1,
+			 dut_block0_process2,
+			 dut_block0_process3,
+			 dut_block0_process4_1,
+			 dut_block0_process4_2,
+			 dut_block0_process4_3,
+			 dut_block0_process5,
+			 dut_block0_process6,
+			 dut_block0_process7,
+			 dut_block0_process8,
+			 dut_block0_process9,
+			 dut_block0_process10,
+			 dut_block0_normalization_process1,
+			 dut_block0_normalization_process2,
+			 dut_block0_normalization_process3,
+			 dut_block0_normalization_process4,
+			 dut_block0_normalization_process5,
+			 dut_block0_inputProjection_process1,
+			 dut_block0_inputProjection_process2,
+			 dut_block0_inputProjection_process3,
+			 dut_block0_inputProjection_process3Last,
+			 dut_block0_inputProjection_process4,
+			 dut_block0_stateProjection_process1,
+			 dut_block0_stateProjection_process2,
+			 dut_block0_stateProjection_process3,
+			 dut_block0_stateProjection_process3Last,
+			 dut_block0_stateProjection_process4,
+			 dut_block0_deltaProjection_process1,
+			 dut_block0_deltaProjection_process2,
+			 dut_block0_deltaProjection_process3,
+			 dut_block0_deltaProjection_process3Last,
+			 dut_block0_deltaProjection_process4,
+			 dut_block0_outputProjection_process1,
+			 dut_block0_outputProjection_process2,
+			 dut_block0_outputProjection_process3,
+			 dut_block0_outputProjection_process3Last,
+			 dut_block0_outputProjection_process4,
+			 dut_block0_scan_process1,
+			 dut_block0_scan_process2,
+			 dut_block0_scan_process3,
+			 dut_block0_scan_process4,
+			 dut_block0_scan_process5,
+			 dut_block1_process1,
+			 dut_block1_process2,
+			 dut_block1_process3,
+			 dut_block1_process4_1,
+			 dut_block1_process4_2,
+			 dut_block1_process4_3,
+			 dut_block1_process5,
+			 dut_block1_process6,
+			 dut_block1_process7,
+			 dut_block1_process8,
+			 dut_block1_process9,
+			 dut_block1_process10,
+			 dut_block1_normalization_process1,
+			 dut_block1_normalization_process2,
+			 dut_block1_normalization_process3,
+			 dut_block1_normalization_process4,
+			 dut_block1_normalization_process5,
+			 dut_block1_inputProjection_process1,
+			 dut_block1_inputProjection_process2,
+			 dut_block1_inputProjection_process3,
+			 dut_block1_inputProjection_process3Last,
+			 dut_block1_inputProjection_process4,
+			 dut_block1_stateProjection_process1,
+			 dut_block1_stateProjection_process2,
+			 dut_block1_stateProjection_process3,
+			 dut_block1_stateProjection_process3Last,
+			 dut_block1_stateProjection_process4,
+			 dut_block1_deltaProjection_process1,
+			 dut_block1_deltaProjection_process2,
+			 dut_block1_deltaProjection_process3,
+			 dut_block1_deltaProjection_process3Last,
+			 dut_block1_deltaProjection_process4,
+			 dut_block1_outputProjection_process1,
+			 dut_block1_outputProjection_process2,
+			 dut_block1_outputProjection_process3,
+			 dut_block1_outputProjection_process3Last,
+			 dut_block1_outputProjection_process4,
+			 dut_block1_scan_process1,
+			 dut_block1_scan_process2,
+			 dut_block1_scan_process3,
+			 dut_block1_scan_process4,
+			 dut_block1_scan_process5,
+			 dut_headHidden_process1,
+			 dut_headHidden_process2,
+			 dut_headHidden_process3,
+			 dut_headHidden_process3Last,
+			 dut_headHidden_process4,
+			 dut_headOutput_process1,
+			 dut_headOutput_process2,
+			 dut_headOutput_process3,
+			 dut_headOutput_process3Last,
+			 dut_headOutput_process4
+
+========================================

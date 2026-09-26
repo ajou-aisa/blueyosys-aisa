@@ -1,0 +1,23 @@
+
+19. Printing statistics.
+
+=== mkTop ===
+
+   Number of wires:              64063
+   Number of wire bits:         755855
+   Number of public wires:       64063
+   Number of public wire bits:  755855
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:             165368
+     CCU2C                       34903
+     DP16KD                          4
+     EHXPLLL                         1
+     L6MUX21                      2619
+     LUT4                        68227
+     MULT18X18D                    141
+     PFUMX                        8577
+     TRELLIS_DPR16X4               252
+     TRELLIS_FF                  50644
+
